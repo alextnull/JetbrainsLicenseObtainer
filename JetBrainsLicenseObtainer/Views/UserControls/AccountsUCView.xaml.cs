@@ -13,9 +13,6 @@ using System.Windows.Shapes;
 
 namespace JetBrainsLicenseObtainer.Views.UserControls
 {
-    /// <summary>
-    /// Interaction logic for AccountsUC.xaml
-    /// </summary>
     public partial class AccountsUC : UserControl
     {
         public AccountsUC()

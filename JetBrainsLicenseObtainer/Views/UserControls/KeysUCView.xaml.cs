@@ -13,9 +13,6 @@ using System.Windows.Shapes;
 
 namespace JetBrainsLicenseObtainer.Views.UserControls
 {
-    /// <summary>
-    /// Interaction logic for KeysUCView.xaml
-    /// </summary>
     public partial class KeysUCView : UserControl
     {
         public KeysUCView()
