@@ -97,7 +97,9 @@
                     Orientation="Vertical"
                     Background="#222222">
             <Button Style="{StaticResource button-leftmenu}"
-                    Template="{StaticResource btnleftmenu-template}">
+                    Template="{StaticResource btnleftmenu-template}"
+                    Command="{Binding UpdateViewCommand}"
+                    CommandParameter="Accounts">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <fa:ImageAwesome Icon="Solid_User"
@@ -108,7 +110,9 @@
                 </Button.Content>
             </Button>
             <Button Style="{StaticResource button-leftmenu}"
-                    Template="{StaticResource btnleftmenu-template}">
+                    Template="{StaticResource btnleftmenu-template}"
+                    Command="{Binding UpdateViewCommand}"
+                    CommandParameter="Keys">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <fa:ImageAwesome Icon="Solid_Key"
@@ -119,7 +123,9 @@
                 </Button.Content>
             </Button>
             <Button Style="{StaticResource button-leftmenu}"
-                    Template="{StaticResource btnleftmenu-template}">
+                    Template="{StaticResource btnleftmenu-template}"
+                    Command="{Binding UpdateViewCommand}"
+                    CommandParameter="OutdatedKeys">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
 
@@ -132,7 +138,9 @@
                 </Button.Content>
             </Button>
             <Button Style="{StaticResource button-leftmenu}"
-                    Template="{StaticResource btnleftmenu-template}">
+                    Template="{StaticResource btnleftmenu-template}"
+                    Command="{Binding UpdateViewCommand}"
+                    CommandParameter="About">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <fa:ImageAwesome Icon="Solid_Info"

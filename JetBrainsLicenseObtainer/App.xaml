@@ -9,8 +9,17 @@
         <DataTemplate DataType="{x:Type viewmodels:AccountsUCViewModel}">
             <views:AccountsUC />
         </DataTemplate>
+        
         <DataTemplate DataType="{x:Type viewmodels:KeysUCViewModel}">
             <views:KeysUCView />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewmodels:OutdatedKeysUCViewModel}">
+            <views:OutdatedKeysUCView />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewmodels:AboutUCViewModel}">
+            <views:AboutUCView />
         </DataTemplate>
     </Application.Resources>
 </Application>
