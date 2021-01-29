@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetBrainsLicenseObtainer", "JetBrainsLicenseObtainer\JetBrainsLicenseObtainer.csproj", "{65C68836-EB25-4EAB-ACE1-7552E98FB3BF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2715A323-A199-4F16-919B-87230708B924}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JBLOConsole", "Tests\JBLOConsole\JBLOConsole.csproj", "{C161A0AF-3E02-4C21-9168-62DBBA528987}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{65C68836-EB25-4EAB-ACE1-7552E98FB3BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65C68836-EB25-4EAB-ACE1-7552E98FB3BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65C68836-EB25-4EAB-ACE1-7552E98FB3BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C161A0AF-3E02-4C21-9168-62DBBA528987}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C161A0AF-3E02-4C21-9168-62DBBA528987}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C161A0AF-3E02-4C21-9168-62DBBA528987}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C161A0AF-3E02-4C21-9168-62DBBA528987}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C161A0AF-3E02-4C21-9168-62DBBA528987} = {2715A323-A199-4F16-919B-87230708B924}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A8AD0217-C7FC-4696-A548-DDF69B3ACC51}
