@@ -61,9 +61,9 @@
         <ListBox>
             <ListBoxItem Margin="0, 50, 0, 0">
                 <StackPanel Orientation="Horizontal">
-                <fa:ImageAwesome Icon="Solid_Home"
+                <fa:ImageAwesome Icon="Solid_User"
                                  Style="{StaticResource lb-imageAwesome}"/>
-                <TextBlock Text="Home" 
+                <TextBlock Text="Accounts" 
                            Style="{StaticResource lb-textblock}"/>
                 </StackPanel>
             </ListBoxItem>
