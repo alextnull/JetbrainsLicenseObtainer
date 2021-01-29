@@ -1,5 +1,6 @@
 ﻿using JetBrainsLicenseObtainer.Infrastructure.Commands;
 using JetBrainsLicenseObtainer.ViewModels.Base;
+using System;
 using System.Windows.Input;
 
 namespace JetBrainsLicenseObtainer.ViewModels
@@ -28,10 +29,16 @@ namespace JetBrainsLicenseObtainer.ViewModels
         private bool CanUpdateViewCommandExecute(object parameter) => true;
         private void OnUpdateViewCommandExecuted(object parameter)
         {
-            if (parameter.ToString() == "Keys")
+            string viewModel = parameter.ToString();
+
+            SelectedViewModel = viewModel switch
             {
-                SelectedViewModel = new KeysUCViewModel();
-            }
+                "Accounts" => new AccountsUCViewModel(),
+                "Keys" => new KeysUCViewModel(),
+                "OutdatedKeys" => new OutdatedKeysUCViewModel(),
+                "About" => new AboutUCViewModel(),
+                _ => throw new ArgumentException("Wrong ViewModel parameter")
+            };
         }
 
         #endregion
