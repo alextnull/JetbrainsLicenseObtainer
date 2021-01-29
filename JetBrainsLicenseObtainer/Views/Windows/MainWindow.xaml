@@ -11,40 +11,23 @@
         Height="450"
         Width="800">
     <Window.Resources>
-        <Style TargetType="ListBox">
-            <Setter Property="BorderThickness"
-                    Value="0" />
-            <Setter Property="Background"
-                    Value="#222222" />
-        </Style>
-        <Style TargetType="ListBoxItem">
-            <Setter Property="Height"
-                    Value="85" />
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver"
-                         Value="True">
-                    <Setter Property="Background"
-                            Value="#282828" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        <Style x:Key="lb-textblock"
+        <Style x:Key="button-textblock"
                TargetType="TextBlock">
             <Setter Property="FontFamily"
                     Value="Century Gothic" />
             <Setter Property="FontSize"
-                    Value="20" />
+                    Value="16" />
             <Setter Property="Foreground"
                     Value="#D3D3D3" />
             <Setter Property="VerticalAlignment"
                     Value="Center" />
             <Setter Property="Margin"
-                    Value="40,0,0,0" />
+                    Value="35,0,0,0" />
         </Style>
-        <Style x:Key="lb-imageAwesome"
+        <Style x:Key="button-imageAwesome"
                TargetType="fa:ImageAwesome">
             <Setter Property="Margin"
-                    Value="10,0,0,0" />
+                    Value="20,0,0,0" />
             <Setter Property="Foreground"
                     Value="#D3D3D3" />
             <Setter Property="Height"
@@ -52,6 +35,45 @@
             <Setter Property="Width"
                     Value="30" />
         </Style>
+
+        <Style x:Key="button-leftmenu"
+               TargetType="Button">
+            <Setter Property="Background"
+                    Value="#222222" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="Height"
+                    Value="80" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Left" />
+
+        </Style>
+
+        <ControlTemplate TargetType="Button"
+                         x:Key="btnleftmenu-template">
+            <Border BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Background="{TemplateBinding Background}"
+                    Height="{TemplateBinding Height}"
+                    Width="{TemplateBinding Width}">
+                <ContentControl Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="#282828" />
+                </Trigger>
+                <Trigger Property="IsPressed"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="#818181" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Window.Resources>
 
     <Window.DataContext>
@@ -70,45 +92,61 @@
         <!--#endregion-->
 
         <!--#region Left menu-->
+   
+        <StackPanel Grid.Column="0"
+                    Orientation="Vertical"
+                    Background="#222222">
+            <Button Style="{StaticResource button-leftmenu}"
+                    Template="{StaticResource btnleftmenu-template}">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome Icon="Solid_User"
+                                         Style="{StaticResource button-imageAwesome}" />
+                        <TextBlock Text="Accounts"
+                                   Style="{StaticResource button-textblock}" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Style="{StaticResource button-leftmenu}"
+                    Template="{StaticResource btnleftmenu-template}">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome Icon="Solid_Key"
+                                         Style="{StaticResource button-imageAwesome}" />
+                        <TextBlock Text="Keys"
+                                   Style="{StaticResource button-textblock}" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Style="{StaticResource button-leftmenu}"
+                    Template="{StaticResource btnleftmenu-template}">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
 
-        <ListBox>
-            <ListBoxItem Margin="0, 50, 0, 0">
-                <StackPanel Orientation="Horizontal">
-                    <fa:ImageAwesome Icon="Solid_User"
-                                     Style="{StaticResource lb-imageAwesome}" />
-                    <TextBlock Text="Accounts"
-                               Style="{StaticResource lb-textblock}" />
-                </StackPanel>
-            </ListBoxItem>
-            <ListBoxItem>
-                <StackPanel Orientation="Horizontal">
-                    <fa:ImageAwesome Icon="Solid_Key"
-                                     Style="{StaticResource lb-imageAwesome}" />
-                    <TextBlock Text="Keys"
-                               Style="{StaticResource lb-textblock}" />
-                </StackPanel>
-            </ListBoxItem>
-            <ListBoxItem>
-                <StackPanel Orientation="Horizontal">
-                    <fa:ImageAwesome Icon="Solid_Lock"
-                                     Style="{StaticResource lb-imageAwesome}" />
-                    <TextBlock Text="Outdated keys"
-                               Style="{StaticResource lb-textblock}" />
-                </StackPanel>
-            </ListBoxItem>
-            <ListBoxItem>
-                <StackPanel Orientation="Horizontal">
-                    <fa:ImageAwesome Icon="Solid_Info"
-                                     Style="{StaticResource lb-imageAwesome}" />
-                    <TextBlock Text="About"
-                               Style="{StaticResource lb-textblock}" />
-                </StackPanel>
-            </ListBoxItem>
-        </ListBox>
+                        <fa:ImageAwesome Icon="Solid_Lock"
+                                         Style="{StaticResource button-imageAwesome}">
+                        </fa:ImageAwesome>
+                        <TextBlock Text="Outdated keys"
+                                   Style="{StaticResource button-textblock}" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Style="{StaticResource button-leftmenu}"
+                    Template="{StaticResource btnleftmenu-template}">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome Icon="Solid_Info"
+                                         Style="{StaticResource button-imageAwesome}" />
+                        <TextBlock Text="About"
+                                   Style="{StaticResource button-textblock}" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </StackPanel>
 
         <!--#endregion-->
-
-        <ContentControl Grid.Column="1" 
+        
+        <ContentControl Grid.Column="1"
                         Content="{Binding SelectedViewModel}" />
     </Grid>
 </Window>
