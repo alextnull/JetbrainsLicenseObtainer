@@ -1,4 +1,6 @@
-﻿using JetBrainsLicenseObtainer.ViewModels.Base;
+﻿using JetBrainsLicenseObtainer.Infrastructure.Commands;
+using JetBrainsLicenseObtainer.ViewModels.Base;
+using System.Windows.Input;
 
 namespace JetBrainsLicenseObtainer.ViewModels
 {
@@ -11,8 +13,36 @@ namespace JetBrainsLicenseObtainer.ViewModels
         public ViewModelBase SelectedViewModel
         {
             get => _selectedViewModel;
-            set => _selectedViewModel = value; 
+            set
+            {
+                _selectedViewModel = value;
+                OnPropertyChanged();
+            }
         }
         #endregion
+
+        #region Commands
+
+        public ICommand UpdateViewCommand { get; set; }
+
+        private bool CanUpdateViewCommandExecute(object parameter) => true;
+        private void OnUpdateViewCommandExecuted(object parameter)
+        {
+            if (parameter.ToString() == "Keys")
+            {
+                SelectedViewModel = new KeysUCViewModel();
+            }
+        }
+
+        #endregion
+
+        public MainWindowViewModel()
+        {
+            #region Commands
+
+            UpdateViewCommand = new RelayCommand(OnUpdateViewCommandExecuted, CanUpdateViewCommandExecute);
+
+            #endregion
+        }
     }
 }
