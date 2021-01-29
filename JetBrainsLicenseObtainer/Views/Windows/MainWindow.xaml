@@ -3,10 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:JetBrainsLicenseObtainer.ViewModels"
         xmlns:local="clr-namespace:JetBrainsLicenseObtainer"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         mc:Ignorable="d"
-        Title="JetBrains License Obtainer" Height="450" Width="800">
+        Title="JetBrains License Obtainer"
+        Height="450"
+        Width="800">
     <Window.Resources>
         <Style TargetType="ListBox">
             <Setter Property="BorderThickness"
@@ -50,21 +53,31 @@
                     Value="30" />
         </Style>
     </Window.Resources>
-    
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
+
     <Grid>
+        <!--#region Grid definitions-->
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.45*"
                               MaxWidth="250" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
+        <!--#endregion-->
+
+        <!--#region Left menu-->
+
         <ListBox>
             <ListBoxItem Margin="0, 50, 0, 0">
                 <StackPanel Orientation="Horizontal">
-                <fa:ImageAwesome Icon="Solid_User"
-                                 Style="{StaticResource lb-imageAwesome}"/>
-                <TextBlock Text="Accounts" 
-                           Style="{StaticResource lb-textblock}"/>
+                    <fa:ImageAwesome Icon="Solid_User"
+                                     Style="{StaticResource lb-imageAwesome}" />
+                    <TextBlock Text="Accounts"
+                               Style="{StaticResource lb-textblock}" />
                 </StackPanel>
             </ListBoxItem>
             <ListBoxItem>
@@ -92,5 +105,10 @@
                 </StackPanel>
             </ListBoxItem>
         </ListBox>
+
+        <!--#endregion-->
+
+        <ContentControl Grid.Column="1" 
+                        Content="{Binding SelectedViewModel}" />
     </Grid>
 </Window>
