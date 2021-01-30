@@ -34,7 +34,6 @@ namespace JetBrainsLicenseObtainer.Services.Stepik.WebsitePages
             try
             {
                 driver.Navigate().GoToUrl("http://stepik.org/registration");
-                driver.Manage().Window.Maximize();
                 FillInput(driver, Locator.FullnameInput, account.FullName);
                 FillInput(driver, Locator.EmailInput, account.Email);
                 FillInput(driver, Locator.PasswordInput, account.Password);
