@@ -11,6 +11,13 @@ namespace JetBrainsLicenseObtainer.ViewModels
     {
         public ObservableCollection<Account> Accounts { get; set; }
 
+        private int _accountsCount = 1;
+        public int AccountsCount
+        {
+            get => _accountsCount;
+            set => Set(ref _accountsCount, value);
+        }
+
         #region Commands
 
         #region RegistrateStepikAccountCommand
