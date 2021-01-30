@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Xml;
+using RestSharp;
 
 namespace JBLOConsole
 {
@@ -6,7 +8,14 @@ namespace JBLOConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            string fullName = UserInfo.GenerateFullName();
+            string email = UserInfo.GenerateEmail();
+            string password = UserInfo.GeneratePassword();
+
+            Console.WriteLine($"Full name: {fullName}");
+            Console.WriteLine($"Email: {email}");
+            Console.WriteLine($"Password: {password}");
+            
         }
     }
 }
