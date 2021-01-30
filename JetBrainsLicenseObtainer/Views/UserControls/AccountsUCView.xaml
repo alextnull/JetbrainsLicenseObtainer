@@ -1,16 +1,191 @@
 ﻿<UserControl x:Class="JetBrainsLicenseObtainer.Views.UserControls.AccountsUC"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:JetBrainsLicenseObtainer.ViewModels"
              xmlns:local="clr-namespace:JetBrainsLicenseObtainer.Views.UserControls"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
              Background="White">
+    
+    <!--#region Resourses-->
+    <UserControl.Resources>
+        <Style x:Key="toppanel-textblock"
+               TargetType="TextBlock">
+            <Setter Property="MinWidth"
+                    Value="165" />
+            <Setter Property="FontSize"
+                    Value="20" />
+            <Setter Property="Margin"
+                    Value="0, 10, 10, 10" />
+        </Style>
+
+        <Style x:Key="toppanel-textbox"
+               TargetType="TextBox">
+            <Setter Property="Margin"
+                    Value="0, 8" />
+            <Setter Property="MinWidth"
+                    Value="100" />
+        </Style>
+
+        <Style x:Key="botpanel-button"
+               TargetType="Button">
+            <Setter Property="Background"
+                    Value="#222222" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="Height"
+                    Value="40" />
+            <Setter Property="Width"
+                    Value="150" />
+        </Style>
+
+        <Style x:Key="button-textblock"
+               TargetType="TextBlock">
+            <Setter Property="FontFamily"
+                    Value="Century Gothic" />
+            <Setter Property="FontSize"
+                    Value="16" />
+            <Setter Property="Foreground"
+                    Value="#D3D3D3" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Center" />
+        </Style>
+        
+        <ControlTemplate TargetType="Button"
+                         x:Key="botpanel-button-template">
+            <Border BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Background="{TemplateBinding Background}"
+                    Height="{TemplateBinding Height}"
+                    Width="{TemplateBinding Width}">
+                <ContentControl Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="#282828" />
+                </Trigger>
+                <Trigger Property="IsPressed"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="#818181" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
+<!--#endregion-->
+    
+    <UserControl.DataContext>
+        <vm:AccountsUCViewModel />
+    </UserControl.DataContext>
+    
     <Grid>
-        <TextBlock Text="Accounts View Dummy Text" 
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   FontSize="45"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="115" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
+
+        <!--#region Top Panel-->
+        <StackPanel Grid.Row="0"
+                    Margin="15, 15, 0, 0">
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Top">
+                <TextBlock Text="Accounts count"
+                           Style="{StaticResource toppanel-textblock}" />
+                <TextBox  x:Name="accountsCount"
+                          Style="{StaticResource toppanel-textbox}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Top">
+                <TextBlock Text="Parse keys after"
+                           Style="{StaticResource toppanel-textblock}" />
+                <TextBox x:Name="keysHours"
+                         Style="{StaticResource toppanel-textbox}" />
+                <TextBlock Text="hours"
+                           Style="{StaticResource toppanel-textblock}" 
+                           Margin="15, 10, 10, 10"/>
+            </StackPanel>
+        </StackPanel>
+        <!--#endregion-->
+
+        <!--#region Accounts DataGrid-->
+        <DataGrid  x:Name="accountsGrid"
+                   Grid.Row="1"
+                   Margin="15, 10"
+                   AutoGenerateColumns="False"
+                   HorizontalGridLinesBrush="DarkGray"
+                   RowBackground="LightGray"
+                   AlternatingRowBackground="White"
+                   ItemsSource="{Binding Accounts}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Full name"
+                                    Binding="{Binding FullName}"
+                                    Width="60*" />
+                <DataGridTextColumn Header="Email"
+                                    Binding="{Binding Email}"
+                                    Width="100*" />
+                <DataGridTextColumn Header="Password"
+                                    Binding="{Binding Password}"
+                                    Width="100*" />
+                <DataGridTextColumn Header="Registration date"
+                                    Binding="{Binding RegistrationDate}"
+                                    Width="60*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!--#endregion-->
+
+        <!--#region Bot Panel-->
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal">
+            
+            <Button Style="{StaticResource botpanel-button}"
+                    Template="{StaticResource botpanel-button-template}"
+                    HorizontalContentAlignment="Center" Margin="15, 0">
+                <Button.Content>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Auto"
+                                   Style="{StaticResource button-textblock}" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Accounts + parse keys" Style="{StaticResource button-textblock}" FontSize="12"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            
+            <Button Style="{StaticResource botpanel-button}"
+                    Template="{StaticResource botpanel-button-template}"
+                    HorizontalContentAlignment="Center"
+                    Margin="15, 0"
+                    Width="170">
+                <Button.Content>
+                    <TextBlock Text="Generate accounts"
+                               Style="{StaticResource button-textblock}"/>
+                </Button.Content>
+            </Button>
+
+            <Button Style="{StaticResource botpanel-button}"
+                    Template="{StaticResource botpanel-button-template}"
+                    HorizontalContentAlignment="Center"
+                    Margin="15, 0"
+                    Width="170">
+                <Button.Content>
+                    <TextBlock Text="Parse keys"
+                               Style="{StaticResource button-textblock}" />
+                </Button.Content>
+            </Button>
+        </StackPanel>
+        
+        <!--#endregion-->
     </Grid>
 </UserControl>
