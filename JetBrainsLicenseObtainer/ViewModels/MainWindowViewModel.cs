@@ -8,21 +8,21 @@ namespace JetBrainsLicenseObtainer.ViewModels
     internal class MainWindowViewModel : ViewModelBase
     {
         #region Selected ViewModel
+
         private ViewModelBase _selectedViewModel = new AccountsUCViewModel();
 
         /// <summary>Selected ViewModel</summary>
         public ViewModelBase SelectedViewModel
         {
             get => _selectedViewModel;
-            set
-            {
-                _selectedViewModel = value;
-                OnPropertyChanged();
-            }
+            set => Set(ref _selectedViewModel, value);
         }
+
         #endregion
 
         #region Commands
+
+        #region UpdateViewCommand
 
         public ICommand UpdateViewCommand { get; set; }
 
@@ -40,6 +40,8 @@ namespace JetBrainsLicenseObtainer.ViewModels
                 _ => throw new ArgumentException("Wrong ViewModel parameter")
             };
         }
+
+        #endregion
 
         #endregion
 
