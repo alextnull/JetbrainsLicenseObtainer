@@ -8,11 +8,11 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FontAwesome5" Version="2.0.8" />
+    <PackageReference Include="RestSharp" Version="106.11.7" />
   </ItemGroup>
 
 </Project>
