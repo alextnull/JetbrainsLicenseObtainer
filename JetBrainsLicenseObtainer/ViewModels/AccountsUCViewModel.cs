@@ -11,14 +11,80 @@ namespace JetBrainsLicenseObtainer.ViewModels
     {
         public ObservableCollection<Account> Accounts { get; set; }
 
+        #region Accounts count
+
         private int _accountsCount = 1;
         public int AccountsCount
         {
             get => _accountsCount;
-            set => Set(ref _accountsCount, value);
+            set
+            {
+                if (value >= 1 && value <= int.MaxValue)
+                    Set(ref _accountsCount, value);
+            }
+
         }
 
+        #endregion
+
+        #region Keys hours
+
+        private int _keysHours = 1;
+
+        public int KeysHours
+        {
+            get => _keysHours;
+            set
+            {
+                if (value >= 1 && value <= 4)
+                    Set(ref _keysHours, value);
+            }
+
+        }
+
+        #endregion
+
         #region Commands
+
+        #region IncreasePropertyCommand
+
+        public ICommand IncreasePropertyCommand { get; set; }
+
+        private bool CanIncreasePropertyCommandExecute(object parameter) => true;
+        private void OnIncreasePropertyCommandExecuted(object parameter)
+        {
+            switch (parameter)
+            {
+                case "AccountsCount":
+                    AccountsCount++;
+                    break;
+                case "KeysHours":
+                    KeysHours++;
+                    break;
+            }
+        }
+
+        #endregion
+
+        #region DecreasePropertyCommand
+
+        public ICommand DecreasePropertyCommand { get; set; }
+
+        private bool CanDecreasePropertyCommandExecute(object parameter) => true;
+        private void OnDecreasePropertyCommandExecuted(object parameter)
+        {
+            switch (parameter)
+            {
+                case "AccountsCount":
+                    AccountsCount--;
+                    break;
+                case "KeysHours":
+                    KeysHours--;
+                    break;
+            }
+        }
+
+        #endregion
 
         #region RegistrateStepikAccountCommand
         public ICommand RegistrateStepikAccountCommand { get; set; }
@@ -27,10 +93,15 @@ namespace JetBrainsLicenseObtainer.ViewModels
         private void OnRegistrateStepikAccountCommandExecuted(object parameter)
         {
             Stepik stepik = new Stepik();
-            Account account = stepik.RegistrateAccount();
+            Account account;
 
-            if (account != null)
-                Accounts.Add(account);
+            for (int i = 0; i < AccountsCount; i++)
+            {
+                account = stepik.RegistrateAccount();
+
+                if (account != null)
+                    Accounts.Add(account);
+            }
         }
 
         #endregion
@@ -44,6 +115,8 @@ namespace JetBrainsLicenseObtainer.ViewModels
             #region Commands
 
             RegistrateStepikAccountCommand = new RelayCommand(OnRegistrateStepikAccountCommandExecuted, CanRegistrateStepikAccountCommandExecute);
+            IncreasePropertyCommand = new RelayCommand(OnIncreasePropertyCommandExecuted, CanIncreasePropertyCommandExecute);
+            DecreasePropertyCommand = new RelayCommand(OnDecreasePropertyCommandExecuted, CanDecreasePropertyCommandExecute);
 
             #endregion
         }
