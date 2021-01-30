@@ -9,7 +9,7 @@
              d:DesignHeight="450"
              d:DesignWidth="800"
              Background="White">
-    
+
     <!--#region Resourses-->
     <UserControl.Resources>
         <Style x:Key="toppanel-textblock"
@@ -55,7 +55,7 @@
             <Setter Property="HorizontalAlignment"
                     Value="Center" />
         </Style>
-        
+
         <ControlTemplate TargetType="Button"
                          x:Key="botpanel-button-template">
             <Border BorderBrush="{TemplateBinding BorderBrush}"
@@ -82,12 +82,12 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
     </UserControl.Resources>
-<!--#endregion-->
-    
+    <!--#endregion-->
+
     <UserControl.DataContext>
         <vm:AccountsUCViewModel />
     </UserControl.DataContext>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="115" />
@@ -112,8 +112,8 @@
                 <TextBox x:Name="keysHours"
                          Style="{StaticResource toppanel-textbox}" />
                 <TextBlock Text="hours"
-                           Style="{StaticResource toppanel-textblock}" 
-                           Margin="15, 10, 10, 10"/>
+                           Style="{StaticResource toppanel-textblock}"
+                           Margin="15, 10, 10, 10" />
             </StackPanel>
         </StackPanel>
         <!--#endregion-->
@@ -148,29 +148,33 @@
         <!--#region Bot Panel-->
         <StackPanel Grid.Row="2"
                     Orientation="Horizontal">
-            
+
             <Button Style="{StaticResource botpanel-button}"
                     Template="{StaticResource botpanel-button-template}"
-                    HorizontalContentAlignment="Center" Margin="15, 0">
+                    HorizontalContentAlignment="Center"
+                    Margin="15, 0">
                 <Button.Content>
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Auto"
                                    Style="{StaticResource button-textblock}" />
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Accounts + parse keys" Style="{StaticResource button-textblock}" FontSize="12"/>
+                            <TextBlock Text="Accounts + parse keys"
+                                       Style="{StaticResource button-textblock}"
+                                       FontSize="12" />
                         </StackPanel>
                     </StackPanel>
                 </Button.Content>
             </Button>
-            
+
             <Button Style="{StaticResource botpanel-button}"
                     Template="{StaticResource botpanel-button-template}"
                     HorizontalContentAlignment="Center"
                     Margin="15, 0"
-                    Width="170">
+                    Width="170"
+                    Command="{Binding RegistrateStepikAccountCommand}">
                 <Button.Content>
                     <TextBlock Text="Generate accounts"
-                               Style="{StaticResource button-textblock}"/>
+                               Style="{StaticResource button-textblock}" />
                 </Button.Content>
             </Button>
 
@@ -185,7 +189,7 @@
                 </Button.Content>
             </Button>
         </StackPanel>
-        
+
         <!--#endregion-->
     </Grid>
 </UserControl>
