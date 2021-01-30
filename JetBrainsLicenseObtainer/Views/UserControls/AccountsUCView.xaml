@@ -27,7 +27,13 @@
             <Setter Property="Margin"
                     Value="0, 8" />
             <Setter Property="MinWidth"
-                    Value="100" />
+                    Value="115" />
+            <Setter Property="MaxWidth"
+                    Value="115" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+            <Setter Property="FontSize"
+                    Value="18" />
         </Style>
 
         <Style x:Key="botpanel-button"
@@ -102,15 +108,44 @@
                         VerticalAlignment="Top">
                 <TextBlock Text="Accounts count"
                            Style="{StaticResource toppanel-textblock}" />
-                <TextBox  x:Name="accountsCount"
-                          Style="{StaticResource toppanel-textbox}" />
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBox  x:Name="accountsCount"
+                              Style="{StaticResource toppanel-textbox}"
+                              Text="{Binding AccountsCount, UpdateSourceTrigger=PropertyChanged}" />
+                    
+                    <Button Content="-"
+                            Margin="5, 10, 0, 10"
+                            Width="20"
+                            Command="{Binding DecreasePropertyCommand}"
+                            CommandParameter="AccountsCount" />
+                    
+                    <Button Content="+"
+                            Margin="5, 10, 0, 10"
+                            Width="20"
+                            Command="{Binding IncreasePropertyCommand}"
+                            CommandParameter="AccountsCount" />
+                </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Top">
                 <TextBlock Text="Parse keys after"
                            Style="{StaticResource toppanel-textblock}" />
-                <TextBox x:Name="keysHours"
-                         Style="{StaticResource toppanel-textbox}" />
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBox x:Name="keysHours"
+                             Style="{StaticResource toppanel-textbox}"
+                             Text="{Binding KeysHours, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button Content="-"
+                            Margin="5, 10, 0, 10"
+                            Width="20"
+                            Command="{Binding DecreasePropertyCommand}"
+                            CommandParameter="KeysHours" />
+
+                    <Button Content="+"
+                            Margin="5, 10, 0, 10"
+                            Width="20"
+                            Command="{Binding IncreasePropertyCommand}"
+                            CommandParameter="KeysHours" />
+                </StackPanel>
                 <TextBlock Text="hours"
                            Style="{StaticResource toppanel-textblock}"
                            Margin="15, 10, 10, 10" />
