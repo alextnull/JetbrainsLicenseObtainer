@@ -32,6 +32,9 @@ namespace JetBrainsLicenseObtainer.Services.Stepik
         /// <returns>Account or null if registration failed</returns>
         public Account RegistrateAccount()
         {
+            chromeDriver.Manage().Cookies.DeleteAllCookies();
+            chromeDriver.Manage().Window.Maximize();
+
             Account account = UserInfo.GenerateAccount();
             bool isAccountRegistrated = RegistrationPage.Registrate(chromeDriver, account);
 
