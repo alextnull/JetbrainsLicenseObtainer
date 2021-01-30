@@ -40,60 +40,90 @@ namespace JetBrainsLicenseObtainer.Services
         /// <summary>
         /// Generates full name with randomuser.me API
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Full name or null if the generation failed</returns>
         public static string GenerateFullName()
         {
-            IRestResponse response = ExecuteRestRequest("https://randomuser.me/api/?inc=name&nat=us&noinfo&format=xml");
-            XmlElement xRoot = GetXmlRoot(response.Content);
-            XmlNode nameNode = xRoot.SelectSingleNode("//name");
+            try
+            {
+                IRestResponse response = ExecuteRestRequest("https://randomuser.me/api/?inc=name&nat=us&noinfo&format=xml");
+                XmlElement xRoot = GetXmlRoot(response.Content);
+                XmlNode nameNode = xRoot.SelectSingleNode("//name");
 
-            string firstName = nameNode.SelectSingleNode("//first").InnerText;
-            string lastName = nameNode.SelectSingleNode("//last").InnerText;
-            string fullName = firstName + " " + lastName;
+                string firstName = nameNode.SelectSingleNode("//first").InnerText;
+                string lastName = nameNode.SelectSingleNode("//last").InnerText;
+                string fullName = firstName + " " + lastName;
 
-            return fullName;
+                return fullName;
+            }
+            catch
+            {
+                return null;
+            }
+
         }
 
         /// <summary>
         /// Generates email with randomuser.me API
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Email or null if the generation failed</returns>
         public static string GenerateEmail()
         {
-            IRestResponse response = ExecuteRestRequest("https://randomuser.me/api/?inc=login&nat=us&noinfo&format=xml");
-            XmlElement xRoot = GetXmlRoot(response.Content);
-            string[] emailDomains = { "@gmail.com", "@outlook.com", "@yahoo.com", "@aol.com", "@yandex.ru" };
+            try
+            {
+                IRestResponse response = ExecuteRestRequest("https://randomuser.me/api/?inc=login&nat=us&noinfo&format=xml");
+                XmlElement xRoot = GetXmlRoot(response.Content);
+                string[] emailDomains = { "@gmail.com", "@outlook.com", "@yahoo.com", "@aol.com", "@yandex.ru" };
 
-            Random rnd = new Random();
-            string email = xRoot.SelectSingleNode("//login/username").InnerText + emailDomains[rnd.Next(emailDomains.Length)];
+                Random rnd = new Random();
+                string email = xRoot.SelectSingleNode("//login/username").InnerText + emailDomains[rnd.Next(emailDomains.Length)];
 
-            return email;
+                return email;
+            }
+            catch
+            {
+                return null;
+            }
+
         }
 
         /// <summary>
         /// Generates password with randomuser.me API
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Password or null if the generation failed</returns>
         public static string GeneratePassword()
         {
-            IRestResponse response = ExecuteRestRequest("https://randomuser.me/api/?inc=login&password=upper,lower,number,10-18&nat=us&noinfo&format=xml");
-            XmlElement xRoot = GetXmlRoot(response.Content);
-            string password = xRoot.SelectSingleNode("//login/password").InnerText;
+            try
+            {
+                IRestResponse response = ExecuteRestRequest("https://randomuser.me/api/?inc=login&password=upper,lower,number,10-18&nat=us&noinfo&format=xml");
+                XmlElement xRoot = GetXmlRoot(response.Content);
+                string password = xRoot.SelectSingleNode("//login/password").InnerText;
 
-            return password;
+                return password;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         /// <summary>
         /// Generates account
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Account or null if the generation failed</returns>
         public static Account GenerateAccount()
         {
-            string fullName = GenerateFullName();
-            string email = GenerateEmail();
-            string password = GeneratePassword();
+            try
+            {
+                string fullName = GenerateFullName();
+                string email = GenerateEmail();
+                string password = GeneratePassword();
 
-            return new Account(fullName, email, password, DateTime.Now);
+                return new Account(fullName, email, password, DateTime.Now);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         #endregion
