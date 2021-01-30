@@ -10,7 +10,7 @@ namespace JetBrainsLicenseObtainer.Services.Stepik
     {
         #region Fields
 
-        private IWebDriver chromeDriver;
+        private IWebDriver _chromeDriver;
 
         #endregion
 
@@ -18,7 +18,7 @@ namespace JetBrainsLicenseObtainer.Services.Stepik
 
         public Stepik()
         {
-            chromeDriver = new ChromeDriver(AppDomain.CurrentDomain.BaseDirectory);
+            _chromeDriver = new ChromeDriver(AppDomain.CurrentDomain.BaseDirectory);
             Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
         }
 
@@ -32,11 +32,11 @@ namespace JetBrainsLicenseObtainer.Services.Stepik
         /// <returns>Account or null if registration failed</returns>
         public Account RegistrateAccount()
         {
-            chromeDriver.Manage().Cookies.DeleteAllCookies();
-            chromeDriver.Manage().Window.Maximize();
+            _chromeDriver.Manage().Cookies.DeleteAllCookies();
+            _chromeDriver.Manage().Window.Maximize();
 
             Account account = UserInfo.GenerateAccount();
-            bool isAccountRegistrated = RegistrationPage.Registrate(chromeDriver, account);
+            bool isAccountRegistrated = RegistrationPage.Registrate(_chromeDriver, account);
 
             if (isAccountRegistrated) return account;
 
