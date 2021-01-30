@@ -159,8 +159,9 @@
                    Margin="15, 10"
                    AutoGenerateColumns="False"
                    HorizontalGridLinesBrush="DarkGray"
-                   RowBackground="LightGray"
+                   RowBackground="#DCDCDC"
                    AlternatingRowBackground="White"
+                   IsReadOnly="True"
                    ItemsSource="{Binding Accounts}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Full name"
