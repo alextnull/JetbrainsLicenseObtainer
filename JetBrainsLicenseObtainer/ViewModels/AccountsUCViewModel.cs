@@ -1,7 +1,9 @@
-﻿using JetBrainsLicenseObtainer.Models;
+﻿using JetBrainsLicenseObtainer.Infrastructure.Commands;
+using JetBrainsLicenseObtainer.Models;
+using JetBrainsLicenseObtainer.Services.Stepik;
 using JetBrainsLicenseObtainer.ViewModels.Base;
-using System;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace JetBrainsLicenseObtainer.ViewModels
 {
@@ -9,15 +11,34 @@ namespace JetBrainsLicenseObtainer.ViewModels
     {
         public ObservableCollection<Account> Accounts { get; set; }
 
+        #region Commands
+
+        #region RegistrateStepikAccountCommand
+        public ICommand RegistrateStepikAccountCommand { get; set; }
+
+        private bool CanRegistrateStepikAccountCommandExecute(object parameter) => true;
+        private void OnRegistrateStepikAccountCommandExecuted(object parameter)
+        {
+            Stepik stepik = new Stepik();
+            Account account = stepik.RegistrateAccount();
+
+            if (account != null)
+                Accounts.Add(account);
+        }
+
+        #endregion
+
+        #endregion
+
         public AccountsUCViewModel()
         {
-            //Just for checking, remove it later
-            Accounts = new ObservableCollection<Account>
-            {
-                new Account("Oleg T", "oleg@gmail.com", "12345", DateTime.Now),
-                new Account("Masha D", "masha@gmail.com", "12345", DateTime.Now),
-                new Account("Dima G", "dimag344@gmail.com", "12345", DateTime.Now)
-            };
+            Accounts = new ObservableCollection<Account>();
+
+            #region Commands
+
+            RegistrateStepikAccountCommand = new RelayCommand(OnRegistrateStepikAccountCommandExecuted, CanRegistrateStepikAccountCommandExecute);
+
+            #endregion
         }
     }
 }
