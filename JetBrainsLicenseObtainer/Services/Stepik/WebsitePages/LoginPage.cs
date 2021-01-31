@@ -19,6 +19,13 @@ namespace JetBrainsLicenseObtainer.Services.Stepik.WebsitePages
 
         #region Methods
 
+        /// <summary>
+        /// Logins into Stepik account
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public static bool Login(IWebDriver driver, string email, string password)
         {
             bool isLogin;
