@@ -47,6 +47,23 @@ namespace JetBrainsLicenseObtainer.Services.Stepik
             return null;
         }
 
+        /// <summary>
+        /// Trying to close the browser driver and every associated widows
+        /// </summary>
+        /// <returns></returns>
+        public bool CloseDriver()
+        {
+            bool isClosed = false;
+
+            if (_chromeDriver != null)
+            {
+                isClosed = true;
+                _chromeDriver.Quit();
+            }
+
+            return isClosed;
+        }
+
         #endregion
     }
 }
