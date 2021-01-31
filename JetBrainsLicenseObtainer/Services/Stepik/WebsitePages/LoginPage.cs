@@ -1,4 +1,5 @@
-﻿using JetBrainsLicenseObtainer.Services.Stepik.Helpers;
+﻿using JetBrainsLicenseObtainer.Models;
+using JetBrainsLicenseObtainer.Services.Stepik.Helpers;
 using OpenQA.Selenium;
 
 namespace JetBrainsLicenseObtainer.Services.Stepik.WebsitePages
@@ -26,15 +27,15 @@ namespace JetBrainsLicenseObtainer.Services.Stepik.WebsitePages
         /// <param name="email"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static bool Login(IWebDriver driver, string email, string password)
+        public static bool Login(IWebDriver driver, Account account)
         {
             bool isLogin;
 
             try
             {
                 driver.Navigate().GoToUrl("https://stepik.org/login");
-                Input.Fill(driver, Locator.EmailInput, email);
-                Input.Fill(driver, Locator.PasswordInput, password);
+                Input.Fill(driver, Locator.EmailInput, account.Email);
+                Input.Fill(driver, Locator.PasswordInput, account.Password);
 
                 IWebElement loginButton = Wait.UntilElementIsVisible(driver, Locator.LoginButton, 30);
                 loginButton.Click();
