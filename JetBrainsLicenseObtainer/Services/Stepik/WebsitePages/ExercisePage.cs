@@ -3,8 +3,6 @@ using JetBrainsLicenseObtainer.Services.Stepik.Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 
 namespace JetBrainsLicenseObtainer.Services.Stepik.WebsitePages
@@ -23,7 +21,7 @@ namespace JetBrainsLicenseObtainer.Services.Stepik.WebsitePages
 
         #region Fields
 
-        private static Solution[] solutions = new Solution[]
+        private static Solution[] _solutions = new Solution[]
         {
             new Solution("https://stepik.org/lesson/13021/step/3", "#include <iostream>\nusing namespace std;\nint main()\n{\nint n, k;\ncin >> n >> k;\ncout << k / n;\nreturn 0;\n}"),
             new Solution("https://stepik.org/lesson/13021/step/4", "#include <iostream>\nusing namespace std;\nint main()\n{\nint n, k;\ncin >> n >> k;\ncout << k % n;\nreturn 0;\n}"),
@@ -45,7 +43,7 @@ namespace JetBrainsLicenseObtainer.Services.Stepik.WebsitePages
             bool isSolved;
             try
             {
-                foreach (Solution solution in solutions)
+                foreach (Solution solution in _solutions)
                 {
                     driver.Navigate().GoToUrl(solution.Url);
                     Wait.UntilElementIsExist(driver, Locator.HiddenTextarea, 120);
