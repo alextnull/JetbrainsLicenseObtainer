@@ -34,12 +34,14 @@ namespace JetBrainsLicenseObtainer.Services.Stepik.WebsitePages
             try
             {
                 driver.Navigate().GoToUrl("http://stepik.org/registration");
-                FillInput(driver, Locator.FullnameInput, account.FullName);
-                FillInput(driver, Locator.EmailInput, account.Email);
-                FillInput(driver, Locator.PasswordInput, account.Password);
+                Input.Fill(driver, Locator.FullnameInput, account.FullName);
+                Input.Fill(driver, Locator.EmailInput, account.Email);
+                Input.Fill(driver, Locator.PasswordInput, account.Password);
+
                 IWebElement registrateButton = Wait.UntilElementIsVisible(driver, Locator.RegistrateButton, 30);
                 registrateButton.Click();
                 Wait.UntilElementIsVisible(driver, Locator.ProfileButton, 30);
+
                 isRegistrate = true;
             }
             catch
@@ -49,18 +51,6 @@ namespace JetBrainsLicenseObtainer.Services.Stepik.WebsitePages
             }
 
             return isRegistrate;
-        }
-
-        /// <summary>
-        /// Finds input using a locator and fill it with text
-        /// </summary>
-        /// <param name="driver"></param>
-        /// <param name="locator"></param>
-        /// <param name="text"></param>
-        private static void FillInput(IWebDriver driver, By locator, string text)
-        {
-            IWebElement element = Wait.UntilElementIsVisible(driver, locator, 20);
-            element.SendKeys(text);
         }
 
         #endregion
