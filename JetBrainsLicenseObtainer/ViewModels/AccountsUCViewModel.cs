@@ -102,6 +102,8 @@ namespace JetBrainsLicenseObtainer.ViewModels
                 if (account != null)
                     Accounts.Add(account);
             }
+
+            stepik.CloseDriver();
         }
 
         #endregion
