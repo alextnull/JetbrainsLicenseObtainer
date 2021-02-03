@@ -1,8 +1,12 @@
-﻿using JetBrainsLicenseObtainer.Infrastructure;
+﻿using JetBrainsLicenseObtainer.Data;
+using JetBrainsLicenseObtainer.Infrastructure;
 using JetBrainsLicenseObtainer.Infrastructure.Commands;
 using JetBrainsLicenseObtainer.Models;
 using JetBrainsLicenseObtainer.Services.Stepik;
 using JetBrainsLicenseObtainer.ViewModels.Base;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace JetBrainsLicenseObtainer.ViewModels
@@ -112,7 +116,14 @@ namespace JetBrainsLicenseObtainer.ViewModels
                 account = stepik.RegistrateAccount();
 
                 if (account != null)
+                {
+                    using (ApplicationContext db = new ApplicationContext())
+                    {
+                        db.Accounts.Add(account);
+                        db.SaveChanges();
+                    }
                     Accounts.Add(account);
+                }
             }
 
             stepik.CloseDriver();
@@ -127,6 +138,16 @@ namespace JetBrainsLicenseObtainer.ViewModels
         {
             Accounts = new AsyncObservableCollection<Account>();
 
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                List<Account> dbAccounts = db.Accounts.ToList();
+                foreach (Account account in dbAccounts)
+                {
+                    Accounts.Add(account);
+                }
+            }
+
+
             #region Commands
 
             RegistrateStepikAccountCommandAsync = new AsyncRelayCommand(OnRegistrateStepikAccountCommandAsyncExecuted, CanRegistrateStepikAccountCommandAsyncExecute);
@@ -135,5 +156,6 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
             #endregion
         }
+
     }
 }
