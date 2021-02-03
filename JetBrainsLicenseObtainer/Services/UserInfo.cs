@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Xml;
 using JetBrainsLicenseObtainer.Models;
 using RestSharp;
@@ -115,7 +116,9 @@ namespace JetBrainsLicenseObtainer.Services
             try
             {
                 string fullName = GenerateFullName();
+                Thread.Sleep(TimeSpan.FromSeconds(2));
                 string email = GenerateEmail();
+                Thread.Sleep(TimeSpan.FromSeconds(2));
                 string password = GeneratePassword();
 
                 return new Account(fullName, email, password, DateTime.Now);
