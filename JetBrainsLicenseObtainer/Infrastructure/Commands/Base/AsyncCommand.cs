@@ -30,12 +30,12 @@ namespace JetBrainsLicenseObtainer.Infrastructure.Commands.Base
 
         bool ICommand.CanExecute(object parameter)
         {
-            return CanExecute();
+            return CanExecute(parameter);
         }
 
         async void ICommand.Execute(object parameter)
         {
-            Task runningTask = ExecuteAsync();
+            Task runningTask = ExecuteAsync(parameter);
 
             runningTasks.Add(runningTask);
 
@@ -49,8 +49,8 @@ namespace JetBrainsLicenseObtainer.Infrastructure.Commands.Base
             }
         }
 
-        public abstract bool CanExecute();
-        public abstract Task ExecuteAsync();
+        public abstract bool CanExecute(object parameter);
+        public abstract Task ExecuteAsync(object parameter);
 
         private void OnRunningTasksChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
