@@ -46,6 +46,30 @@
                     Value="40" />
             <Setter Property="Width"
                     Value="150" />
+            <Style.Triggers>
+                <Trigger Property="IsEnabled"
+                         Value="False">
+                    <Setter Property="Background"
+                            Value="#545454" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="toppanel-button"
+               TargetType="Button">
+            <Setter Property="Background"
+                    Value="#222222" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="Foreground"
+                    Value="#D3D3D3" />
+            <Style.Triggers>
+                <Trigger Property="IsEnabled"
+                         Value="False">
+                    <Setter Property="Background"
+                            Value="#545454" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="button-textblock"
@@ -78,7 +102,7 @@
                 <Trigger Property="IsMouseOver"
                          Value="True">
                     <Setter Property="Background"
-                            Value="#282828" />
+                            Value="#3d3d3d" />
                 </Trigger>
                 <Trigger Property="IsPressed"
                          Value="True">
@@ -111,19 +135,26 @@
                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                     <TextBox  x:Name="accountsCount"
                               Style="{StaticResource toppanel-textbox}"
-                              Text="{Binding AccountsCount, UpdateSourceTrigger=PropertyChanged}" />
+                              Text="{Binding AccountsCount, UpdateSourceTrigger=PropertyChanged}" 
+                              IsEnabled="{Binding ViewModelAccess}"/>
                     
                     <Button Content="-"
                             Margin="5, 10, 0, 10"
                             Width="20"
                             Command="{Binding DecreasePropertyCommand}"
-                            CommandParameter="AccountsCount" />
+                            CommandParameter="AccountsCount"
+                            IsEnabled="{Binding ViewModelAccess}" 
+                            Style="{StaticResource toppanel-button}"
+                            Template="{StaticResource botpanel-button-template}"/>
                     
                     <Button Content="+"
                             Margin="5, 10, 0, 10"
                             Width="20"
                             Command="{Binding IncreasePropertyCommand}"
-                            CommandParameter="AccountsCount" />
+                            CommandParameter="AccountsCount"
+                            IsEnabled="{Binding ViewModelAccess}"
+                            Style="{StaticResource toppanel-button}"
+                            Template="{StaticResource botpanel-button-template}" />
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
@@ -133,18 +164,25 @@
                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                     <TextBox x:Name="keysHours"
                              Style="{StaticResource toppanel-textbox}"
-                             Text="{Binding KeysHours, UpdateSourceTrigger=PropertyChanged}" />
+                             Text="{Binding KeysHours, UpdateSourceTrigger=PropertyChanged}"
+                             IsEnabled="{Binding ViewModelAccess}" />
                     <Button Content="-"
                             Margin="5, 10, 0, 10"
                             Width="20"
                             Command="{Binding DecreasePropertyCommand}"
-                            CommandParameter="KeysHours" />
+                            CommandParameter="KeysHours"
+                            IsEnabled="{Binding ViewModelAccess}"
+                            Style="{StaticResource toppanel-button}"
+                            Template="{StaticResource botpanel-button-template}" />
 
                     <Button Content="+"
                             Margin="5, 10, 0, 10"
                             Width="20"
                             Command="{Binding IncreasePropertyCommand}"
-                            CommandParameter="KeysHours" />
+                            CommandParameter="KeysHours"
+                            IsEnabled="{Binding ViewModelAccess}"
+                            Style="{StaticResource toppanel-button}"
+                            Template="{StaticResource botpanel-button-template}" />
                 </StackPanel>
                 <TextBlock Text="hours"
                            Style="{StaticResource toppanel-textblock}"
@@ -188,7 +226,8 @@
             <Button Style="{StaticResource botpanel-button}"
                     Template="{StaticResource botpanel-button-template}"
                     HorizontalContentAlignment="Center"
-                    Margin="15, 0">
+                    Margin="15, 0"
+                    IsEnabled="{Binding ViewModelAccess}">
                 <Button.Content>
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Auto"
@@ -207,7 +246,8 @@
                     HorizontalContentAlignment="Center"
                     Margin="15, 0"
                     Width="170"
-                    Command="{Binding RegistrateStepikAccountCommand}">
+                    Command="{Binding RegistrateStepikAccountCommandAsync}"
+                    IsEnabled="{Binding ViewModelAccess}">
                 <Button.Content>
                     <TextBlock Text="Generate accounts"
                                Style="{StaticResource button-textblock}" />
@@ -218,7 +258,8 @@
                     Template="{StaticResource botpanel-button-template}"
                     HorizontalContentAlignment="Center"
                     Margin="15, 0"
-                    Width="170">
+                    Width="170"
+                    IsEnabled="{Binding ViewModelAccess}">
                 <Button.Content>
                     <TextBlock Text="Parse keys"
                                Style="{StaticResource button-textblock}" />

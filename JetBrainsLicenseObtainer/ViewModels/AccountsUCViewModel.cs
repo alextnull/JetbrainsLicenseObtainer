@@ -1,15 +1,26 @@
-﻿using JetBrainsLicenseObtainer.Infrastructure.Commands;
+﻿using JetBrainsLicenseObtainer.Infrastructure;
+using JetBrainsLicenseObtainer.Infrastructure.Commands;
 using JetBrainsLicenseObtainer.Models;
 using JetBrainsLicenseObtainer.Services.Stepik;
 using JetBrainsLicenseObtainer.ViewModels.Base;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace JetBrainsLicenseObtainer.ViewModels
 {
     class AccountsUCViewModel : ViewModelBase
     {
-        public ObservableCollection<Account> Accounts { get; set; }
+        public AsyncObservableCollection<Account> Accounts { get; set; }
+
+        #region ViewModel Access
+
+        private bool _viewModelAccess = true;
+        public bool ViewModelAccess
+        {
+            get => _viewModelAccess;
+            set => Set(ref _viewModelAccess, value);
+        }
+
+        #endregion
 
         #region Accounts count
 
@@ -86,12 +97,13 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
         #endregion
 
-        #region RegistrateStepikAccountCommand
-        public ICommand RegistrateStepikAccountCommand { get; set; }
+        #region RegistrateStepikAccountCommandAsync
+        public ICommand RegistrateStepikAccountCommandAsync { get; set; }
 
-        private bool CanRegistrateStepikAccountCommandExecute(object parameter) => true;
-        private void OnRegistrateStepikAccountCommandExecuted(object parameter)
+        private bool CanRegistrateStepikAccountCommandAsyncExecute(object parameter) => true;
+        private void OnRegistrateStepikAccountCommandAsyncExecuted(object parameter)
         {
+            ViewModelAccess = false;
             Stepik stepik = new Stepik();
             Account account;
 
@@ -104,6 +116,7 @@ namespace JetBrainsLicenseObtainer.ViewModels
             }
 
             stepik.CloseDriver();
+            ViewModelAccess = true;
         }
 
         #endregion
@@ -112,11 +125,11 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
         public AccountsUCViewModel()
         {
-            Accounts = new ObservableCollection<Account>();
+            Accounts = new AsyncObservableCollection<Account>();
 
             #region Commands
 
-            RegistrateStepikAccountCommand = new RelayCommand(OnRegistrateStepikAccountCommandExecuted, CanRegistrateStepikAccountCommandExecute);
+            RegistrateStepikAccountCommandAsync = new AsyncRelayCommand(OnRegistrateStepikAccountCommandAsyncExecuted, CanRegistrateStepikAccountCommandAsyncExecute);
             IncreasePropertyCommand = new RelayCommand(OnIncreasePropertyCommandExecuted, CanIncreasePropertyCommandExecute);
             DecreasePropertyCommand = new RelayCommand(OnDecreasePropertyCommandExecuted, CanDecreasePropertyCommandExecute);
 
