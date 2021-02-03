@@ -39,8 +39,14 @@ namespace JetBrainsLicenseObtainer.Services.Stepik
             }
 
             Account account = UserInfo.GenerateAccount();
-            bool isAccountRegistrated = RegistrationPage.Registrate(_chromeDriver, account);
-            bool isTasksSolved = ExercisePage.SolveTasks(_chromeDriver);
+            bool isAccountRegistrated = false;
+            bool isTasksSolved = false;
+
+            if (account.FullName != null && account.Email != null && account.Password != null)
+            {
+                isAccountRegistrated = RegistrationPage.Registrate(_chromeDriver, account);
+                isTasksSolved = ExercisePage.SolveTasks(_chromeDriver);
+            }
 
             if (isAccountRegistrated && isTasksSolved) return account;
 
