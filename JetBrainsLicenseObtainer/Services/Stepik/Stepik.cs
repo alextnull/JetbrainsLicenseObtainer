@@ -50,6 +50,27 @@ namespace JetBrainsLicenseObtainer.Services.Stepik
         }
 
         /// <summary>
+        /// Trying to parse jetbrains license key from Stepik account
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns>Key or null if parsing failed </returns>
+        public Key ParseKey(Account account)
+        {
+            _chromeDriver?.Manage().Cookies.DeleteAllCookies();
+            _chromeDriver?.Manage().Window.Maximize();
+
+            bool hasAuth = LoginPage.Login(_chromeDriver, account);
+
+            if (hasAuth)
+            {
+                Key licenseKey = NotificationPage.ParseKey(_chromeDriver, account);
+                return licenseKey;
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Trying to close the browser driver and every associated widows
         /// </summary>
         /// <returns></returns>
