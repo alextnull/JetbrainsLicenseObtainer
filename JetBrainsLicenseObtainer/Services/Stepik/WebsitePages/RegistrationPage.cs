@@ -47,7 +47,7 @@ namespace JetBrainsLicenseObtainer.Services.Stepik.WebsitePages
             catch
             {
                 isRegistrate = false;
-                driver.Quit();
+                driver?.Quit();
             }
 
             return isRegistrate;

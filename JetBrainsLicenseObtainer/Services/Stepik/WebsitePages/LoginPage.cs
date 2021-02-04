@@ -46,7 +46,7 @@ namespace JetBrainsLicenseObtainer.Services.Stepik.WebsitePages
             catch
             {
                 isLogin = false;
-                driver.Quit();
+                driver?.Quit();
             }
 
             return isLogin;

@@ -68,7 +68,7 @@ namespace JetBrainsLicenseObtainer.Services.Stepik.WebsitePages
             catch
             {
                 isSolved = false;
-                driver.Quit();
+                driver?.Quit();
             }
 
             return isSolved;
