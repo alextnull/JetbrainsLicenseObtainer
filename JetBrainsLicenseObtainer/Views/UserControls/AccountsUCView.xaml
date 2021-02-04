@@ -200,6 +200,7 @@
                    RowBackground="#DCDCDC"
                    AlternatingRowBackground="White"
                    IsReadOnly="True"
+                   SelectionUnit="Cell"
                    ItemsSource="{Binding Accounts}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Full name"
