@@ -19,6 +19,12 @@ namespace JetBrainsLicenseObtainer.Services.Stepik.WebsitePages
 
         #region Methods
 
+        /// <summary>
+        /// Parse jetbrains license key from Stepik account 
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="account"></param>
+        /// <returns>Key or null if failed</returns>
         public static Key ParseKey(IWebDriver driver, Account account)
         {
             try
@@ -35,7 +41,7 @@ namespace JetBrainsLicenseObtainer.Services.Stepik.WebsitePages
             }
             catch
             {
-                driver.Quit();
+                driver?.Quit();
                 return null;
             }
         }
