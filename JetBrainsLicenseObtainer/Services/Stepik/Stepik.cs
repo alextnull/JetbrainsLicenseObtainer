@@ -19,7 +19,6 @@ namespace JetBrainsLicenseObtainer.Services.Stepik
         public Stepik()
         {
             _chromeDriver = new ChromeDriver(AppDomain.CurrentDomain.BaseDirectory);
-            Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
         }
 
         #endregion
