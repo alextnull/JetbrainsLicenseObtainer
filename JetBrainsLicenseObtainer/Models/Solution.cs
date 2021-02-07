@@ -1,6 +1,6 @@
 ﻿namespace JetBrainsLicenseObtainer.Models
 {
-    class Solution
+    public class Solution
     {
         #region Properties
 

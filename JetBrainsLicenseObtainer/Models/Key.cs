@@ -2,7 +2,7 @@
 
 namespace JetBrainsLicenseObtainer.Models
 {
-    class Key
+    public class Key
     {
         #region Properties
 
