@@ -6,7 +6,7 @@ using RestSharp;
 
 namespace JetBrainsLicenseObtainer.Services
 {
-    static class UserInfo
+    public static class UserInfo
     {
         #region Methods
 

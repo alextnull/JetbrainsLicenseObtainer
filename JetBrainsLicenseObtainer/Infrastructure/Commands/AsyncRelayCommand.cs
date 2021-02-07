@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace JetBrainsLicenseObtainer.Infrastructure.Commands
 {
-    class AsyncRelayCommand : AsyncCommand
+    public class AsyncRelayCommand : AsyncCommand
     {
         private readonly Action<object> _execute;
         private readonly Func<object, bool> _canExecute;

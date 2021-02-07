@@ -2,7 +2,7 @@
 
 namespace JetBrainsLicenseObtainer.ViewModels
 {
-    class KeysUCViewModel : ViewModelBase
+    public class KeysUCViewModel : ViewModelBase
     {
     }
 }

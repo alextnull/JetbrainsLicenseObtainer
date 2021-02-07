@@ -3,7 +3,7 @@ using OpenQA.Selenium.Support.Extensions;
 
 namespace JetBrainsLicenseObtainer.Services.Stepik.Helpers
 {
-    static class IWebElementExtension
+    public static class IWebElementExtension
     {
         public static void RemoveAttributesJS(this IWebElement element, IWebDriver driver, params string[] attributes)
         {

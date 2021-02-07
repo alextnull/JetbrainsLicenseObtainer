@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace JetBrainsLicenseObtainer.Infrastructure.Commands.Base
 {
-    internal abstract class AsyncCommand : ICommand
+    public abstract class AsyncCommand : ICommand
     {
         private readonly ObservableCollection<Task> runningTasks;
 

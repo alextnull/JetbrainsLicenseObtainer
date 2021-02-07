@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace JetBrainsLicenseObtainer.Infrastructure
 {
-    class AsyncObservableCollection<T> : ObservableCollection<T>
+    public class AsyncObservableCollection<T> : ObservableCollection<T>
     {
         private readonly SynchronizationContext _synchronizationContext = SynchronizationContext.Current;
 

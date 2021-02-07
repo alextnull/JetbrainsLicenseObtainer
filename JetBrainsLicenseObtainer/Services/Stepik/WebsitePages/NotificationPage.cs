@@ -5,7 +5,7 @@ using System;
 
 namespace JetBrainsLicenseObtainer.Services.Stepik.WebsitePages
 {
-    static class NotificationPage
+    public static class NotificationPage
     {
         #region Structures
 

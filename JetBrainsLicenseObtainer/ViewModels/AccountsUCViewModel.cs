@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace JetBrainsLicenseObtainer.ViewModels
 {
-    class AccountsUCViewModel : ViewModelBase
+    public class AccountsUCViewModel : ViewModelBase
     {
         public AsyncObservableCollection<Account> Accounts { get; set; }
 
@@ -151,6 +151,7 @@ namespace JetBrainsLicenseObtainer.ViewModels
             #endregion
 
             LoadAccountsCommand.Execute(null);
+
         }
 
     }

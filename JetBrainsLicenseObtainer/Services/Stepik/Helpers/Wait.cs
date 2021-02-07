@@ -4,7 +4,7 @@ using System;
 
 namespace JetBrainsLicenseObtainer.Services.Stepik.Helpers
 {
-    static class Wait
+    public static class Wait
     {
         #region Methods
 

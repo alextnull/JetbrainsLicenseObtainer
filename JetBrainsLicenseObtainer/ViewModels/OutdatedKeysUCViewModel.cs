@@ -2,7 +2,7 @@
 
 namespace JetBrainsLicenseObtainer.ViewModels
 {
-    class OutdatedKeysUCViewModel : ViewModelBase
+    public class OutdatedKeysUCViewModel : ViewModelBase
     {
     }
 }

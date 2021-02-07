@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace JetBrainsLicenseObtainer.Services.Stepik.WebsitePages
 {
-    static class RegistrationPage
+    public static class RegistrationPage
     {
         #region Structures
 

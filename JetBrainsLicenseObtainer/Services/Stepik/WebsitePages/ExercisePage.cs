@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace JetBrainsLicenseObtainer.Services.Stepik.WebsitePages
 {
-    class ExercisePage
+    public class ExercisePage
     {
         #region Structures
 

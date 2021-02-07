@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace JetBrainsLicenseObtainer.ViewModels
 {
-    internal class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : ViewModelBase
     {
         #region Selected ViewModel
 

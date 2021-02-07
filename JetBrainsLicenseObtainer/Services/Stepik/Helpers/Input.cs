@@ -2,7 +2,7 @@
 
 namespace JetBrainsLicenseObtainer.Services.Stepik.Helpers
 {
-    static class Input
+    public static class Input
     {
         /// <summary>
         /// Finds input using a locator and fill it with text

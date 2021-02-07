@@ -6,7 +6,7 @@ using System;
 
 namespace JetBrainsLicenseObtainer.Services.Stepik
 {
-    class Stepik
+    public class Stepik
     {
         #region Fields
 
