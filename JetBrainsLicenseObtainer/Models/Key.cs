@@ -17,10 +17,11 @@ namespace JetBrainsLicenseObtainer.Models
 
         #region Constructor
 
-        public Key(Account account, string licenseKey, DateTime expirationDate)
+        public Key(Account account, string licenseKey, DateTime registrationDate, DateTime expirationDate)
         {
             Account = account;
             LicenseKey = licenseKey;
+            RegistrationDate = registrationDate;
             ExpirationDate = expirationDate;
         }
 
