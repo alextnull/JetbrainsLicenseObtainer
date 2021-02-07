@@ -16,6 +16,11 @@ namespace JetBrainsLicenseObtainer.Models
 
         #region Constructor
 
+        public Account()
+        {
+
+        }
+
         public Account(string fullName, string email, string password, DateTime registrationDate)
         {
             FullName = fullName;

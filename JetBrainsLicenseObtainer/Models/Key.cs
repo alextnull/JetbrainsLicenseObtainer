@@ -16,6 +16,11 @@ namespace JetBrainsLicenseObtainer.Models
 
         #region Constructor
 
+        public Key()
+        {
+
+        }
+
         public Key(Account account, string licenseKey, DateTime expirationDate)
         {
             Account = account;
