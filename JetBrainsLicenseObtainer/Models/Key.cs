@@ -10,7 +10,6 @@ namespace JetBrainsLicenseObtainer.Models
         public string LicenseKey { get; set; }
         public DateTime ExpirationDate { get; set; }
 
-        public int AccountId { get; set; }
         public Account Account { get; set; }
 
         #endregion
