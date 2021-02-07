@@ -4,9 +4,6 @@ using JetBrainsLicenseObtainer.Infrastructure.Commands;
 using JetBrainsLicenseObtainer.Models;
 using JetBrainsLicenseObtainer.Services.Stepik;
 using JetBrainsLicenseObtainer.ViewModels.Base;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Input;
 
 namespace JetBrainsLicenseObtainer.ViewModels
@@ -117,12 +114,8 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
                 if (account != null)
                 {
-                    //using (ApplicationContext db = new ApplicationContext())
-                    //{
-                    //    db.Accounts.Add(account);
-                    //    db.SaveChanges();
-                    //}
-                    Accounts.Add(account);
+                    AccountsDataAccess.SaveAccount(account);
+                    LoadAccountsCommand.Execute(null);
                 }
             }
 
@@ -132,29 +125,32 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
         #endregion
 
+        #region LoadAccountsCommand
+
+        public ICommand LoadAccountsCommand { get; set; }
+
+        private bool CanLoadAccountsCommandExecute(object parameter) => true;
+        private void OnLoadAccountsCommandExecuted(object parameter)
+        {
+            Accounts = new AsyncObservableCollection<Account>(AccountsDataAccess.LoadAccounts());
+        }
+
+        #endregion
+
         #endregion
 
         public AccountsUCViewModel()
         {
-            Accounts = new AsyncObservableCollection<Account>();
-
-            //using (ApplicationContext db = new ApplicationContext())
-            //{
-            //    List<Account> dbAccounts = db.Accounts.ToList();
-            //    foreach (Account account in dbAccounts)
-            //    {
-            //        Accounts.Add(account);
-            //    }
-            //}
-
-
             #region Commands
 
             RegistrateStepikAccountCommandAsync = new AsyncRelayCommand(OnRegistrateStepikAccountCommandAsyncExecuted, CanRegistrateStepikAccountCommandAsyncExecute);
             IncreasePropertyCommand = new RelayCommand(OnIncreasePropertyCommandExecuted, CanIncreasePropertyCommandExecute);
             DecreasePropertyCommand = new RelayCommand(OnDecreasePropertyCommandExecuted, CanDecreasePropertyCommandExecute);
-
+            LoadAccountsCommand = new RelayCommand(OnLoadAccountsCommandExecuted, CanLoadAccountsCommandExecute);
+            
             #endregion
+
+            LoadAccountsCommand.Execute(null);
         }
 
     }
