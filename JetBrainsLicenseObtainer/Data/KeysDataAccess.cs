@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using JetBrainsLicenseObtainer.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
@@ -23,7 +24,7 @@ namespace JetBrainsLicenseObtainer.Data
             using (IDbConnection db = new SQLiteConnection(_connectionString))
             {
                 db.Execute("insert into Keys (LicenseKey, ExpirationDate, Account)" +
-                            "values (@LicenseKey, @ExpirationDate, @Account)", key);
+                           $"values (@LicenseKey, @ExpirationDate, '{SerializeAccount(key.Account)}')", key);
             }
         }
 
@@ -33,6 +34,26 @@ namespace JetBrainsLicenseObtainer.Data
             {
                 db.Execute("delete from Keys where Id = '@Id'", key);
             }
+        }
+
+        public static string SerializeAccount(Account account)
+        {
+            return $"{account.Id};{account.FullName};{account.Email};{account.Password};{account.RegistrationDate}";
+        }
+
+        public static Account DeserializeAccount(string accountString)
+        {
+            string[] accountData = accountString.Split(";");
+            Account account = new Account()
+            {
+                Id = int.Parse(accountData[0]),
+                FullName = accountData[1],
+                Email = accountData[2],
+                Password = accountData[3],
+                RegistrationDate = DateTime.Parse(accountData[4])
+            };
+
+            return account;
         }
     }
 }
