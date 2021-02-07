@@ -38,7 +38,7 @@ namespace JetBrainsLicenseObtainer.Data
 
         public static string SerializeAccount(Account account)
         {
-            return $"{account.Id};{account.FullName};{account.Email};{account.Password};{account.RegistrationDate}";
+            return $"{account.Id};{account.FullName};{account.Email};{account.Password};{account.RegistrationDate.ToString("yyyy-MM-dd HH:mm:ss")}";
         }
 
         public static Account DeserializeAccount(string accountString)
