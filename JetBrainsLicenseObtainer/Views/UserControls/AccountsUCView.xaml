@@ -260,7 +260,8 @@
                     HorizontalContentAlignment="Center"
                     Margin="15, 0"
                     Width="170"
-                    IsEnabled="{Binding ViewModelAccess}">
+                    IsEnabled="{Binding ViewModelAccess}"
+                    Command="{Binding ParseJetbrainsLicenseCommandAsync}">
                 <Button.Content>
                     <TextBlock Text="Parse keys"
                                Style="{StaticResource button-textblock}" />

@@ -4,13 +4,20 @@ using JetBrainsLicenseObtainer.Infrastructure.Commands;
 using JetBrainsLicenseObtainer.Models;
 using JetBrainsLicenseObtainer.Services.Stepik;
 using JetBrainsLicenseObtainer.ViewModels.Base;
+using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace JetBrainsLicenseObtainer.ViewModels
 {
     public class AccountsUCViewModel : ViewModelBase
     {
-        public AsyncObservableCollection<Account> Accounts { get; set; }
+        AsyncObservableCollection<Account> _accounts;
+        public AsyncObservableCollection<Account> Accounts 
+        {
+            get => _accounts; 
+            set => Set(ref _accounts, value);
+        }
 
         #region ViewModel Access
 
@@ -125,6 +132,40 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
         #endregion
 
+        #region ParseJetbrainsLicenseCommandAsync
+        public ICommand ParseJetbrainsLicenseCommandAsync { get; set; }
+
+        private bool CanParseJetbrainsLicenseCommandAsyncExecute(object parameter) => true;
+        private void OnParseJetbrainsLicenseCommandAsyncExecuted(object parameter)
+        {
+            ViewModelAccess = false;
+
+            Stepik stepik = new Stepik();
+
+            List<Account> accounts = AccountsDataAccess.LoadAccounts();
+            foreach (Account account in accounts)
+            {
+                TimeSpan timeSinceRegistration = DateTime.Now - account.RegistrationDate;
+                bool isAccountRegistratedHourAgo = timeSinceRegistration.TotalHours > 1;
+
+                Models.Key key = null;
+                if (isAccountRegistratedHourAgo)
+                    key = stepik.ParseKey(account);
+
+                if (key != null)
+                {
+                    KeysDataAccess.SaveKey(key);
+                    AccountsDataAccess.RemoveAccount(account);
+                    LoadAccountsCommand.Execute(null);
+                }
+            }
+
+            stepik.CloseDriver();
+            ViewModelAccess = true;
+        }
+
+        #endregion
+
         #region LoadAccountsCommand
 
         public ICommand LoadAccountsCommand { get; set; }
@@ -147,7 +188,7 @@ namespace JetBrainsLicenseObtainer.ViewModels
             IncreasePropertyCommand = new RelayCommand(OnIncreasePropertyCommandExecuted, CanIncreasePropertyCommandExecute);
             DecreasePropertyCommand = new RelayCommand(OnDecreasePropertyCommandExecuted, CanDecreasePropertyCommandExecute);
             LoadAccountsCommand = new RelayCommand(OnLoadAccountsCommandExecuted, CanLoadAccountsCommandExecute);
-            
+            ParseJetbrainsLicenseCommandAsync = new AsyncRelayCommand(OnParseJetbrainsLicenseCommandAsyncExecuted, CanParseJetbrainsLicenseCommandAsyncExecute);
             #endregion
 
             LoadAccountsCommand.Execute(null);
