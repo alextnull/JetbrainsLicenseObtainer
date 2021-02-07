@@ -31,7 +31,7 @@ namespace JetBrainsLicenseObtainer.Data
         {
             using (IDbConnection db = new SQLiteConnection(_connectionString))
             {
-                db.Execute("delete from Accounts where Id = '@Id'", account);
+                db.Execute("delete from Accounts where Id = @Id", account);
             }
         }
     }
