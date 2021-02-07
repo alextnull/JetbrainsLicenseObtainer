@@ -117,11 +117,11 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
                 if (account != null)
                 {
-                    using (ApplicationContext db = new ApplicationContext())
-                    {
-                        db.Accounts.Add(account);
-                        db.SaveChanges();
-                    }
+                    //using (ApplicationContext db = new ApplicationContext())
+                    //{
+                    //    db.Accounts.Add(account);
+                    //    db.SaveChanges();
+                    //}
                     Accounts.Add(account);
                 }
             }
@@ -138,14 +138,14 @@ namespace JetBrainsLicenseObtainer.ViewModels
         {
             Accounts = new AsyncObservableCollection<Account>();
 
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                List<Account> dbAccounts = db.Accounts.ToList();
-                foreach (Account account in dbAccounts)
-                {
-                    Accounts.Add(account);
-                }
-            }
+            //using (ApplicationContext db = new ApplicationContext())
+            //{
+            //    List<Account> dbAccounts = db.Accounts.ToList();
+            //    foreach (Account account in dbAccounts)
+            //    {
+            //        Accounts.Add(account);
+            //    }
+            //}
 
 
             #region Commands
