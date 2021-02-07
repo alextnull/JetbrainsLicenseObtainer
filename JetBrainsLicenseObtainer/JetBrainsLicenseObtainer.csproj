@@ -21,9 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="jblo.db">
+    <Content Include="jblo.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    </Content>
   </ItemGroup>
 
 </Project>
