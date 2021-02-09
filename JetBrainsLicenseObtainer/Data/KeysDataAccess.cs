@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
-using System.Linq;
+using System.IO;
 
 namespace JetBrainsLicenseObtainer.Data
 {
@@ -14,8 +14,20 @@ namespace JetBrainsLicenseObtainer.Data
         {
             using (IDbConnection db = new SQLiteConnection(_connectionString))
             {
-                IEnumerable<Key> keys = db.Query<Key>("select * from Keys", new DynamicParameters());
-                return keys.ToList();
+                IEnumerable<dynamic> keysDynamic = db.Query<dynamic>("select * from Keys", new DynamicParameters());
+                List<Key> keys = new List<Key>();
+                foreach (dynamic key in keysDynamic)
+                {
+                    keys.Add( new Key()
+                    {
+                        Id = (int)key.Id,
+                        LicenseKey = key.LicenseKey,
+                        ExpirationDate = DateTime.Parse(key.ExpirationDate),
+                        Account = DeserializeAccount(BytesToString(key.Account))
+                    });
+                }
+
+                return keys;
             }
         }
 
@@ -54,6 +66,17 @@ namespace JetBrainsLicenseObtainer.Data
             };
 
             return account;
+        }
+
+        static string BytesToString(byte[] bytes)
+        {
+            using (var stream = new MemoryStream(bytes))
+            {
+                using (var streamReader = new StreamReader(stream))
+                {
+                    return streamReader.ReadToEnd();
+                }
+            }
         }
     }
 }
