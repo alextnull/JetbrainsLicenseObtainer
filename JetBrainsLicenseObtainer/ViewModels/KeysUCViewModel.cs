@@ -1,6 +1,8 @@
-﻿using JetBrainsLicenseObtainer.Infrastructure;
-using JetBrainsLicenseObtainer.Models;
+﻿using JetBrainsLicenseObtainer.Data;
+using JetBrainsLicenseObtainer.Infrastructure;
+using JetBrainsLicenseObtainer.Infrastructure.Commands;
 using JetBrainsLicenseObtainer.ViewModels.Base;
+using System.Windows.Input;
 
 namespace JetBrainsLicenseObtainer.ViewModels
 {
@@ -8,9 +10,9 @@ namespace JetBrainsLicenseObtainer.ViewModels
     {
         #region Keys Collection
 
-        AsyncObservableCollection<Key> _keys;
+        AsyncObservableCollection<Models.Key> _keys;
 
-        public AsyncObservableCollection<Key> Keys
+        public AsyncObservableCollection<Models.Key> Keys
         {
             get => _keys;
             set => Set(ref _keys, value);
@@ -18,11 +20,33 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
         #endregion
 
+        #region Commands
+
+        #region LoadKeysCommand
+
+        ICommand LoadKeysCommand { get; set; }
+
+        private bool CanLoadKeysCommandExecute(object parameter) => true;
+        private void OnLoadKeysCommandExecuted(object parameter)
+        {
+            Keys = new AsyncObservableCollection<Models.Key>(KeysDataAccess.LoadKeys());
+        }
+
+        #endregion
+
+        #endregion
+
         #region Constructor
 
         public KeysUCViewModel()
         {
+            #region Commands
 
+            LoadKeysCommand = new RelayCommand(OnLoadKeysCommandExecuted, CanLoadKeysCommandExecute);
+
+            #endregion
+
+            LoadKeysCommand.Execute(null);
         }
 
         #endregion
