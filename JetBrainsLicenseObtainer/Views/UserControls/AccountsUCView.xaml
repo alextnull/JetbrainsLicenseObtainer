@@ -213,7 +213,7 @@
                                     Binding="{Binding Password}"
                                     Width="100*" />
                 <DataGridTextColumn Header="Registration date"
-                                    Binding="{Binding RegistrationDate}"
+                                    Binding="{Binding RegistrationDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}"
                                     Width="60*" />
             </DataGrid.Columns>
         </DataGrid>

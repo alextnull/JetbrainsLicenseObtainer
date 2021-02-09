@@ -42,7 +42,7 @@
                                     Binding="{Binding LicenseKey}" />
                 <DataGridTextColumn Header="Expiration date"
                                     Width="60*"
-                                    Binding="{Binding ExpirationDate}" />
+                                    Binding="{Binding ExpirationDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" />
             </DataGrid.Columns>
         </DataGrid>
 
