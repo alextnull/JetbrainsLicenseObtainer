@@ -1,16 +1,51 @@
 ﻿<UserControl x:Class="JetBrainsLicenseObtainer.Views.UserControls.KeysUCView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:JetBrainsLicenseObtainer.Views.UserControls"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
              Background="White">
     <Grid>
-        <TextBlock Text="Keys View Dummy Text"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   FontSize="45" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="18" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--#region Menu-->
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="File">
+                <MenuItem Header="Export to csv" />
+            </MenuItem>
+        </Menu>
+
+        <!--#endregion-->
+
+        <!--#region Keys DataGrid-->
+
+        <DataGrid x:Name="keysGrid"
+                  Grid.Row="1"
+                  Margin="15"
+                  AutoGenerateColumns="False"
+                  HorizontalGridLinesBrush="DarkGray"
+                  RowBackground="#DCDCDC"
+                  AlternatingRowBackground="White"
+                  IsReadOnly="True"
+                  SelectionUnit="Cell"
+                  ItemsSource="{Binding Keys}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Key"
+                                    Width="60*"
+                                    Binding="{Binding LicenseKey}" />
+                <DataGridTextColumn Header="Expiration date"
+                                    Width="60*"
+                                    Binding="{Binding ExpirationDate}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!--#endregion-->
     </Grid>
 </UserControl>
