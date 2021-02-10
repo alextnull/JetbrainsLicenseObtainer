@@ -122,7 +122,11 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
                 if (account != null)
                 {
-                    AccountsDataAccess.SaveAccount(account);
+                    using (DataContext db = new DataContext())
+                    {
+                        db.Accounts.Add(account);
+                        db.SaveChanges();
+                    }
                     LoadAccountsCommand.Execute(null);
                 }
             }
