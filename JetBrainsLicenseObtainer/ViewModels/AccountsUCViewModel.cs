@@ -141,9 +141,13 @@ namespace JetBrainsLicenseObtainer.ViewModels
         {
             ViewModelAccess = false;
 
-            Stepik stepik = new Stepik();
+            List<Account> accounts = new List<Account>();
+            using (DataContext db = new DataContext())
+            {
+                accounts = db.Accounts.ToList();
+            }
 
-            List<Account> accounts = AccountsDataAccess.LoadAccounts();
+            Stepik stepik = new Stepik();
             foreach (Account account in accounts)
             {
                 TimeSpan timeSinceRegistration = DateTime.Now - account.RegistrationDate;
@@ -155,8 +159,12 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
                 if (key != null)
                 {
-                    KeysDataAccess.SaveKey(key);
-                    AccountsDataAccess.RemoveAccount(account);
+                    using (DataContext db = new DataContext())
+                    {
+                        db.Keys.Add(key);
+                        db.Accounts.Remove(account);
+                        db.SaveChanges();
+                    }
                     LoadAccountsCommand.Execute(null);
                 }
             }
