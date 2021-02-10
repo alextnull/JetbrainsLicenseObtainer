@@ -64,6 +64,7 @@ namespace JetBrainsLicenseObtainer.ViewModels
             #region Commands
 
             LoadKeysCommand = new RelayCommand(OnLoadKeysCommandExecuted, CanLoadKeysCommandExecute);
+            ExportToCsvCommand = new RelayCommand(OnExportToCsvCommandExecuted, CanExportToCsvCommandExecute);
 
             #endregion
 

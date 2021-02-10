@@ -22,7 +22,8 @@
 
         <Menu Grid.Row="0">
             <MenuItem Header="File">
-                <MenuItem Header="Export to csv" />
+                <MenuItem Header="Export to csv"
+                          Command="{Binding ExportToCsvCommand}"/>
             </MenuItem>
         </Menu>
 
