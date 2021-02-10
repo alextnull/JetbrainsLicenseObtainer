@@ -10,8 +10,6 @@ namespace JetBrainsLicenseObtainer.Models
         public string LicenseKey { get; set; }
         public DateTime ExpirationDate { get; set; }
 
-        public Account Account { get; set; }
-
         #endregion
 
         #region Constructor
@@ -21,9 +19,8 @@ namespace JetBrainsLicenseObtainer.Models
 
         }
 
-        public Key(Account account, string licenseKey, DateTime expirationDate)
+        public Key(string licenseKey, DateTime expirationDate)
         {
-            Account = account;
             LicenseKey = licenseKey;
             ExpirationDate = expirationDate;
         }
