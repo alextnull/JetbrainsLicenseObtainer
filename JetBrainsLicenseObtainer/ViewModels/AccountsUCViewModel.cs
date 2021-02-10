@@ -2,6 +2,8 @@
 using JetBrainsLicenseObtainer.Infrastructure;
 using JetBrainsLicenseObtainer.Infrastructure.Commands;
 using JetBrainsLicenseObtainer.Models;
+using JetBrainsLicenseObtainer.Services;
+using JetBrainsLicenseObtainer.Services.CsvExport;
 using JetBrainsLicenseObtainer.Services.Stepik;
 using JetBrainsLicenseObtainer.ViewModels.Base;
 using System;
@@ -14,9 +16,9 @@ namespace JetBrainsLicenseObtainer.ViewModels
     public class AccountsUCViewModel : ViewModelBase
     {
         AsyncObservableCollection<Account> _accounts;
-        public AsyncObservableCollection<Account> Accounts 
+        public AsyncObservableCollection<Account> Accounts
         {
-            get => _accounts; 
+            get => _accounts;
             set => Set(ref _accounts, value);
         }
 
@@ -194,6 +196,21 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
         #endregion
 
+        #region ExportToCsvCommand
+
+        public ICommand ExportToCsvCommand { get; set; }
+
+        private bool CanExportToCsvCommandExecute(object parameter) => true;
+        private void OnExportToCsvCommandExecuted(object parameter)
+        {
+            using (DataContext db = new DataContext())
+            {
+                Export.ToCsv<Account, AccountMap>(db.Accounts.ToList());
+            }
+        }
+
+        #endregion
+
         #endregion
 
         public AccountsUCViewModel()
@@ -205,6 +222,8 @@ namespace JetBrainsLicenseObtainer.ViewModels
             DecreasePropertyCommand = new RelayCommand(OnDecreasePropertyCommandExecuted, CanDecreasePropertyCommandExecute);
             LoadAccountsCommand = new RelayCommand(OnLoadAccountsCommandExecuted, CanLoadAccountsCommandExecute);
             ParseJetbrainsLicenseCommandAsync = new AsyncRelayCommand(OnParseJetbrainsLicenseCommandAsyncExecuted, CanParseJetbrainsLicenseCommandAsyncExecute);
+            ExportToCsvCommand = new RelayCommand(OnExportToCsvCommandExecuted, CanExportToCsvCommandExecute);
+
             #endregion
 
             LoadAccountsCommand.Execute(null);
