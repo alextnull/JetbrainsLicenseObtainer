@@ -3,11 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:JetBrainsLicenseObtainer.ViewModels"
              xmlns:local="clr-namespace:JetBrainsLicenseObtainer.Views.UserControls"
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800"
              Background="White">
+    <UserControl.DataContext>
+        <vm:KeysUCViewModel />
+    </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="18" />
@@ -40,8 +44,11 @@
                 <DataGridTextColumn Header="Key"
                                     Width="60*"
                                     Binding="{Binding LicenseKey}" />
+                <DataGridTextColumn Header="Registration date"
+                                    Width="50*"
+                                    Binding="{Binding RegistrationDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" />
                 <DataGridTextColumn Header="Expiration date"
-                                    Width="60*"
+                                    Width="50*"
                                     Binding="{Binding ExpirationDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}" />
             </DataGrid.Columns>
         </DataGrid>
