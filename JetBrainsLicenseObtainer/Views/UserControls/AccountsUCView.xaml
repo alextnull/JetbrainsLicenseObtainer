@@ -120,13 +120,24 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="18" />
             <RowDefinition Height="115" />
             <RowDefinition Height="*" />
             <RowDefinition Height="70" />
         </Grid.RowDefinitions>
 
+        <!--#region Menu-->
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="File">
+                <MenuItem Header="Export to csv" />
+            </MenuItem>
+        </Menu>
+
+        <!--#endregion-->
+        
         <!--#region Top Panel-->
-        <StackPanel Grid.Row="0"
+        <StackPanel Grid.Row="1"
                     Margin="15, 15, 0, 0">
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Top">
@@ -193,7 +204,7 @@
 
         <!--#region Accounts DataGrid-->
         <DataGrid  x:Name="accountsGrid"
-                   Grid.Row="1"
+                   Grid.Row="2"
                    Margin="15, 10"
                    AutoGenerateColumns="False"
                    HorizontalGridLinesBrush="DarkGray"
@@ -221,7 +232,7 @@
         <!--#endregion-->
 
         <!--#region Bot Panel-->
-        <StackPanel Grid.Row="2"
+        <StackPanel Grid.Row="3"
                     Orientation="Horizontal">
 
             <Button Style="{StaticResource botpanel-button}"
