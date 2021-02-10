@@ -6,6 +6,7 @@ using JetBrainsLicenseObtainer.Services.Stepik;
 using JetBrainsLicenseObtainer.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 
 namespace JetBrainsLicenseObtainer.ViewModels
@@ -173,7 +174,10 @@ namespace JetBrainsLicenseObtainer.ViewModels
         private bool CanLoadAccountsCommandExecute(object parameter) => true;
         private void OnLoadAccountsCommandExecuted(object parameter)
         {
-            Accounts = new AsyncObservableCollection<Account>(AccountsDataAccess.LoadAccounts());
+            using (DataContext db = new DataContext())
+            {
+                Accounts = new AsyncObservableCollection<Account>(db.Accounts.ToList());
+            }
         }
 
         #endregion
