@@ -7,6 +7,6 @@ Selenium bot that creates jetbrains educational license through Stepik
 3) Bot parses Jetbrains educational license.
 
 # Information
-Stepik website does not ban the IP from which many accounts have been registered.
-Jetbrains educational license usually arrives in an 1-3 hours.
+Stepik website does not ban the IP from which many accounts have been registered.<br />
+Jetbrains educational license usually arrives in an 1-3 hours.<br />
 That license arrives if you solved more than 3 programming or data analysis problems within 7 days on the open course with certificates.
