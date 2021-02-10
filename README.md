@@ -1,4 +1,4 @@
-# JetBrainsLicenseObtainer
+# JetBrains License Obtainer
 Selenium bot that creates jetbrains educational license through Stepik website.
 
 # How it works
