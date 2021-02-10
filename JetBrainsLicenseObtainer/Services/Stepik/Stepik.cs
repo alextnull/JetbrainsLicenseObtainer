@@ -31,22 +31,29 @@ namespace JetBrainsLicenseObtainer.Services.Stepik
         /// <returns>Account or null if registration failed</returns>
         public Account RegistrateAccount()
         {
-            _chromeDriver?.Manage().Cookies.DeleteAllCookies();
-            _chromeDriver?.Manage().Window.Maximize();
-
-            Account account = UserInfo.GenerateAccount();
-            bool isAccountRegistrated = false;
-            bool isTasksSolved = false;
-
-            if (account.FullName != null && account.Email != null && account.Password != null)
+            try
             {
-                isAccountRegistrated = RegistrationPage.Registrate(_chromeDriver, account);
-                isTasksSolved = ExercisePage.SolveTasks(_chromeDriver);
+                _chromeDriver?.Manage().Cookies.DeleteAllCookies();
+                _chromeDriver?.Manage().Window.Maximize();
+
+                Account account = UserInfo.GenerateAccount();
+                bool isAccountRegistrated = false;
+                bool isTasksSolved = false;
+
+                if (account.FullName != null && account.Email != null && account.Password != null)
+                {
+                    isAccountRegistrated = RegistrationPage.Registrate(_chromeDriver, account);
+                    isTasksSolved = ExercisePage.SolveTasks(_chromeDriver);
+                }
+
+                if (isAccountRegistrated && isTasksSolved) return account;
+
+                return null;
             }
-
-            if (isAccountRegistrated && isTasksSolved) return account;
-
-            return null;
+            catch
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -56,18 +63,25 @@ namespace JetBrainsLicenseObtainer.Services.Stepik
         /// <returns>Key or null if parsing failed </returns>
         public Key ParseKey(Account account)
         {
-            _chromeDriver?.Manage().Cookies.DeleteAllCookies();
-            _chromeDriver?.Manage().Window.Maximize();
-
-            bool hasAuth = LoginPage.Login(_chromeDriver, account);
-
-            if (hasAuth)
+            try
             {
-                Key licenseKey = NotificationPage.ParseKey(_chromeDriver, account);
-                return licenseKey;
-            }
+                _chromeDriver?.Manage().Cookies.DeleteAllCookies();
+                _chromeDriver?.Manage().Window.Maximize();
 
-            return null;
+                bool hasAuth = LoginPage.Login(_chromeDriver, account);
+
+                if (hasAuth)
+                {
+                    Key licenseKey = NotificationPage.ParseKey(_chromeDriver, account);
+                    return licenseKey;
+                }
+
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         /// <summary>
