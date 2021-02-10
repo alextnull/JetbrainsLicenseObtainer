@@ -23,7 +23,7 @@ namespace JetBrainsLicenseObtainer.Models
         public Key(string licenseKey, DateTime registrationDate, DateTime expirationDate)
         {
             LicenseKey = licenseKey;
-            RegistartionDate = registrationDate;
+            RegistrationDate = registrationDate;
             ExpirationDate = expirationDate;
         }
 
