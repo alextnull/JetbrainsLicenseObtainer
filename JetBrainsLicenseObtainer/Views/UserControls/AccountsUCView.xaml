@@ -131,7 +131,8 @@
         <Menu Grid.Row="0">
             <MenuItem Header="File">
                 <MenuItem Header="Export to csv"
-                          IsEnabled="{Binding ViewModelAccess}" />
+                          IsEnabled="{Binding ViewModelAccess}" 
+                          Command="{Binding ExportToCsvCommand}"/>
             </MenuItem>
         </Menu>
 
