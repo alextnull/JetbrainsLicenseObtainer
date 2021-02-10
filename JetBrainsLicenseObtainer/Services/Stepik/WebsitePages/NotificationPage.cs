@@ -35,7 +35,7 @@ namespace JetBrainsLicenseObtainer.Services.Stepik.WebsitePages
                 licenseLink.Click();
 
                 IWebElement licenseKey = Wait.UntilElementIsVisible(driver, Locator.LicenseKey, 30);
-                Key key = new Key(account, licenseKey.Text, expirationDate);
+                Key key = new Key(licenseKey.Text, DateTime.Now, expirationDate);
 
                 return key;
             }
