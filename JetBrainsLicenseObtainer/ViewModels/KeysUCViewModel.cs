@@ -1,6 +1,8 @@
 ﻿using JetBrainsLicenseObtainer.Data;
 using JetBrainsLicenseObtainer.Infrastructure;
 using JetBrainsLicenseObtainer.Infrastructure.Commands;
+using JetBrainsLicenseObtainer.Services;
+using JetBrainsLicenseObtainer.Services.CsvExport;
 using JetBrainsLicenseObtainer.ViewModels.Base;
 using System.Linq;
 using System.Windows.Input;
@@ -33,6 +35,21 @@ namespace JetBrainsLicenseObtainer.ViewModels
             using (DataContext db = new DataContext())
             {
                 Keys = new AsyncObservableCollection<Models.Key>(db.Keys.ToList());
+            }
+        }
+
+        #endregion
+
+        #region ExportToCsvCommand
+
+        public ICommand ExportToCsvCommand { get; set; }
+
+        private bool CanExportToCsvCommandExecute(object parameter) => true;
+        private void OnExportToCsvCommandExecuted(object parameter)
+        {
+            using (DataContext db = new DataContext())
+            {
+                Export.ToCsv<Models.Key, KeyMap>(db.Keys.ToList());
             }
         }
 
