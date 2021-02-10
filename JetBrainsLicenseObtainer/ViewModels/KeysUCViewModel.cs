@@ -2,6 +2,7 @@
 using JetBrainsLicenseObtainer.Infrastructure;
 using JetBrainsLicenseObtainer.Infrastructure.Commands;
 using JetBrainsLicenseObtainer.ViewModels.Base;
+using System.Linq;
 using System.Windows.Input;
 
 namespace JetBrainsLicenseObtainer.ViewModels
@@ -29,7 +30,10 @@ namespace JetBrainsLicenseObtainer.ViewModels
         private bool CanLoadKeysCommandExecute(object parameter) => true;
         private void OnLoadKeysCommandExecuted(object parameter)
         {
-            Keys = new AsyncObservableCollection<Models.Key>(KeysDataAccess.LoadKeys());
+            using (DataContext db = new DataContext())
+            {
+                Keys = new AsyncObservableCollection<Models.Key>(db.Keys.ToList());
+            }
         }
 
         #endregion
