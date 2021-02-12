@@ -9,6 +9,7 @@ using JetBrainsLicenseObtainer.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows.Input;
 
 namespace JetBrainsLicenseObtainer.ViewModels
@@ -211,6 +212,21 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
         #endregion
 
+        #region AutoGenerateCommandAsync
+
+        public ICommand AutoGenerateCommandAsync { get; set; }
+
+        private bool CanAutoGenerateCommandAsyncExecute(object parameter) => true;
+        private void OnAutoGenerateCommandAsyncExecuted(object parameter)
+        {
+            RegistrateStepikAccountCommandAsync.Execute(null);
+            ViewModelAccess = false;
+            Thread.Sleep(TimeSpan.FromHours(KeysHours) + TimeSpan.FromMinutes(7));
+            ParseJetbrainsLicenseCommandAsync.Execute(null);
+        }
+
+        #endregion
+
         #endregion
 
         public AccountsUCViewModel()
@@ -223,7 +239,7 @@ namespace JetBrainsLicenseObtainer.ViewModels
             LoadAccountsCommand = new RelayCommand(OnLoadAccountsCommandExecuted, CanLoadAccountsCommandExecute);
             ParseJetbrainsLicenseCommandAsync = new AsyncRelayCommand(OnParseJetbrainsLicenseCommandAsyncExecuted, CanParseJetbrainsLicenseCommandAsyncExecute);
             ExportToCsvCommand = new RelayCommand(OnExportToCsvCommandExecuted, CanExportToCsvCommandExecute);
-
+            AutoGenerateCommandAsync = new AsyncRelayCommand(OnAutoGenerateCommandAsyncExecuted, CanAutoGenerateCommandAsyncExecute);
             #endregion
 
             LoadAccountsCommand.Execute(null);
