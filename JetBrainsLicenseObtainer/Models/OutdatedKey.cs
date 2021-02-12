@@ -29,7 +29,6 @@ namespace JetBrainsLicenseObtainer.Models
 
         public OutdatedKey(Key key)
         {
-            Id = key.Id;
             LicenseKey = key.LicenseKey;
             ExpirationDate = key.ExpirationDate;
             RegistrationDate = key.RegistrationDate;
