@@ -7,7 +7,7 @@ namespace JetBrainsLicenseObtainer.Data
     { 
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Key> Keys { get; set; }
-        public DbSet<Key> OutdatedKeys { get; set; }
+        public DbSet<OutdatedKey> OutdatedKeys { get; set; }
 
         public DataContext()
         {
