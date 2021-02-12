@@ -77,7 +77,7 @@ namespace JetBrainsLicenseObtainer.ViewModels
                 {
                     using (DataContext db = new DataContext())
                     {
-                        db.OutdatedKeys.Add(key);
+                        db.OutdatedKeys.Add(new Models.OutdatedKey(key));
                         db.Keys.Remove(key);
                         db.SaveChanges();
                     }
