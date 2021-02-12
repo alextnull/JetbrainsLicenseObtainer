@@ -69,7 +69,7 @@
             <Button HorizontalContentAlignment="Center"
                     HorizontalAlignment="Left"
                     Margin="20, 10"
-                    Command="{Binding OpenGithubPageCommand} ">
+                    Command="{Binding OpenGithubPageCommand}">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border BorderBrush="{TemplateBinding BorderBrush}"
