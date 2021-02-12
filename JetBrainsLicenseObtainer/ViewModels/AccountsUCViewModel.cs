@@ -219,10 +219,14 @@ namespace JetBrainsLicenseObtainer.ViewModels
         private bool CanAutoGenerateCommandAsyncExecute(object parameter) => true;
         private void OnAutoGenerateCommandAsyncExecuted(object parameter)
         {
-            RegistrateStepikAccountCommandAsync.Execute(null);
+            //for synchronous execution
+            ICommand RegistrateStepikAccountCommand = new RelayCommand(OnRegistrateStepikAccountCommandAsyncExecuted, CanRegistrateStepikAccountCommandAsyncExecute);
+            ICommand ParseJetbrainsLicenseCommand = new RelayCommand(OnParseJetbrainsLicenseCommandAsyncExecuted, CanParseJetbrainsLicenseCommandAsyncExecute);
+
+            RegistrateStepikAccountCommand.Execute(null);
             ViewModelAccess = false;
             Thread.Sleep(TimeSpan.FromHours(KeysHours) + TimeSpan.FromMinutes(7));
-            ParseJetbrainsLicenseCommandAsync.Execute(null);
+            ParseJetbrainsLicenseCommand.Execute(null);
         }
 
         #endregion
