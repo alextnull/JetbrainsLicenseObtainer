@@ -102,7 +102,9 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
             #endregion
 
+            OrganizeKeysCommand.Execute(null);
             LoadKeysCommand.Execute(null);
+            
         }
 
         #endregion
