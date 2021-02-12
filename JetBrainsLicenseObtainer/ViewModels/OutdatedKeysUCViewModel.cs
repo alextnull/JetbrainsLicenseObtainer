@@ -27,7 +27,7 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
         #region LoadOutdatedKeysCommand
 
-        ICommand LoadOutdatedKeysCommand { get; set; }
+        public ICommand LoadOutdatedKeysCommand { get; set; }
 
         private bool CanLoadOutdatedKeysCommandExecute(object parameter) => true;
         private void OnLoadOutdatedKeysCommandExecuted(object parameter)
