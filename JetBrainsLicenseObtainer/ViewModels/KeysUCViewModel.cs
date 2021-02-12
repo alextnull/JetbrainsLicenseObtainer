@@ -4,6 +4,8 @@ using JetBrainsLicenseObtainer.Infrastructure.Commands;
 using JetBrainsLicenseObtainer.Services;
 using JetBrainsLicenseObtainer.Services.CsvExport;
 using JetBrainsLicenseObtainer.ViewModels.Base;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 
@@ -55,6 +57,37 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
         #endregion
 
+        #region OrganizeKeysCommand
+
+        public ICommand OrganizeKeysCommand { get; set; }
+
+        private bool CanOrganizeKeysCommandExecute(object parameter) => true;
+        private void OnOrganizeKeysCommandExecuted(object parameter)
+        {
+            List<Models.Key> keys = new List<Models.Key>();
+            using (DataContext db = new DataContext())
+            {
+                keys = db.Keys.ToList();
+            }
+
+            foreach (Models.Key key in keys)
+            {
+                bool isKeyValid = DateTime.Now > key.ExpirationDate;
+                if (isKeyValid)
+                {
+                    using (DataContext db = new DataContext())
+                    {
+                        db.OutdatedKeys.Add(key);
+                        db.Keys.Remove(key);
+                        db.SaveChanges();
+                    }
+                }
+            }
+
+        }
+
+        #endregion
+
         #endregion
 
         #region Constructor
@@ -65,6 +98,7 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
             LoadKeysCommand = new RelayCommand(OnLoadKeysCommandExecuted, CanLoadKeysCommandExecute);
             ExportToCsvCommand = new RelayCommand(OnExportToCsvCommandExecuted, CanExportToCsvCommandExecute);
+            OrganizeKeysCommand = new RelayCommand(OnOrganizeKeysCommandExecuted, CanOrganizeKeysCommandExecute);
 
             #endregion
 
