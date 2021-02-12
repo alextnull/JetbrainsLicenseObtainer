@@ -241,7 +241,8 @@
                     Template="{StaticResource botpanel-button-template}"
                     HorizontalContentAlignment="Center"
                     Margin="15, 0"
-                    IsEnabled="{Binding ViewModelAccess}">
+                    IsEnabled="{Binding ViewModelAccess}"
+                    Command="{Binding AutoGenerateCommandAsync}">
                 <Button.Content>
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Auto"
