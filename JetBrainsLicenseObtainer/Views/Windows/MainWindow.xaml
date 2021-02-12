@@ -8,8 +8,8 @@
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         mc:Ignorable="d"
         Title="JetBrains License Obtainer"
-        Height="450"
-        Width="800">
+        Height="550"
+        Width="1050">
     <Window.Resources>
         <Style x:Key="button-textblock"
                TargetType="TextBlock">
