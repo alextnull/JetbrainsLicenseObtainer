@@ -38,8 +38,8 @@
                   RowBackground="#DCDCDC"
                   AlternatingRowBackground="White"
                   IsReadOnly="True"
-                  SelectionUnit="Cell"
-                  ItemsSource="{Binding OutdatedKeys}">
+                  ItemsSource="{Binding OutdatedKeys}"
+                  SelectedItem="{Binding SelectedKey}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Key"
                                     Width="60*"
