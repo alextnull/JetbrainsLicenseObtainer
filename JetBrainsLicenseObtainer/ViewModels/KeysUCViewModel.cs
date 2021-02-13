@@ -100,6 +100,27 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
         #endregion
 
+        #region SendToOutdatedKeysCommand
+
+        public ICommand SendToOutdatedKeysCommand { get; set; }
+
+        private bool CanSendToOutdatedKeysCommandExecute(object parameter) => true;
+        private void OnSendToOutdatedKeysCommandExecuted(object parameter)
+        {
+            if (SelectedKey != null)
+            {
+                using (DataContext db = new DataContext())
+                {
+                    db.OutdatedKeys.Add(new Models.OutdatedKey(SelectedKey));
+                    db.Keys.Remove(SelectedKey);
+                    db.SaveChanges();
+                }
+                LoadKeysCommand.Execute(null);
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region Constructor
@@ -111,6 +132,7 @@ namespace JetBrainsLicenseObtainer.ViewModels
             LoadKeysCommand = new RelayCommand(OnLoadKeysCommandExecuted, CanLoadKeysCommandExecute);
             ExportToCsvCommand = new RelayCommand(OnExportToCsvCommandExecuted, CanExportToCsvCommandExecute);
             OrganizeKeysCommand = new RelayCommand(OnOrganizeKeysCommandExecuted, CanOrganizeKeysCommandExecute);
+            SendToOutdatedKeysCommand = new RelayCommand(OnSendToOutdatedKeysCommandExecuted, CanSendToOutdatedKeysCommandExecute);
 
             #endregion
 
