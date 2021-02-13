@@ -40,7 +40,8 @@
                   AlternatingRowBackground="White"
                   IsReadOnly="True"
                   SelectionUnit="Cell"
-                  ItemsSource="{Binding Keys}">
+                  ItemsSource="{Binding Keys}"
+                  SelectedItem="{Binding SelectedKey}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Key"
                                     Width="60*"

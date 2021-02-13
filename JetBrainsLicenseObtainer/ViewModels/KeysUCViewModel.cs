@@ -25,6 +25,18 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
         #endregion
 
+        #region Selected key
+
+        Models.Key _selectedKey;
+
+        public Models.Key SelectedKey
+        {
+            get => _selectedKey;
+            set => Set(ref _selectedKey, value);
+        }
+
+        #endregion
+
         #region Commands
 
         #region LoadKeysCommand
