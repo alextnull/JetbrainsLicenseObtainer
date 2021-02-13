@@ -5,6 +5,7 @@ using JetBrainsLicenseObtainer.Services;
 using JetBrainsLicenseObtainer.Services.CsvExport;
 using JetBrainsLicenseObtainer.ViewModels.Base;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace JetBrainsLicenseObtainer.ViewModels
@@ -25,9 +26,9 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
         #region Selected key
 
-        Models.Key _selectedKey;
+        Models.OutdatedKey _selectedKey;
 
-        public Models.Key SelectedKey
+        public Models.OutdatedKey SelectedKey
         {
             get => _selectedKey;
             set => Set(ref _selectedKey, value);
@@ -67,6 +68,21 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
         #endregion
 
+        #region CopySelectedKeyCommand
+
+        public ICommand CopySelectedKeyCommand { get; set; }
+
+        private bool CanCopySelectedKeyCommandExecute(object parameter) => true;
+        private void OnCopySelectedKeyCommandExecuted(object parameter)
+        {
+            if (SelectedKey != null)
+            {
+                Clipboard.SetText(SelectedKey.LicenseKey);
+            }
+        }
+
+        #endregion
+
         #endregion
 
         public OutdatedKeysUCViewModel()
@@ -75,6 +91,7 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
             ExportToCsvCommand = new RelayCommand(OnExportToCsvCommandExecuted, CanExportToCsvCommandExecute);
             LoadOutdatedKeysCommand = new RelayCommand(OnLoadOutdatedKeysCommandExecuted, CanLoadOutdatedKeysCommandExecute);
+            CopySelectedKeyCommand = new RelayCommand(OnCopySelectedKeyCommandExecuted, CanCopySelectedKeyCommandExecute);
 
             #endregion
 
