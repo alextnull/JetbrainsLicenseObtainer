@@ -26,6 +26,8 @@
                           Command="{Binding ExportToCsvCommand}"/>
                 <MenuItem Header="Send selected key to Outdated keys"
                           Command="{Binding SendToOutdatedKeysCommand}" />
+                <MenuItem Header="Copy selected key"
+                          Command="{Binding CopySelectedKeyCommand}" />
             </MenuItem>
         </Menu>
 
@@ -41,7 +43,6 @@
                   RowBackground="#DCDCDC"
                   AlternatingRowBackground="White"
                   IsReadOnly="True"
-                  SelectionUnit="Cell"
                   ItemsSource="{Binding Keys}"
                   SelectedItem="{Binding SelectedKey}">
             <DataGrid.Columns>
@@ -59,6 +60,8 @@
                 <ContextMenu>
                     <MenuItem Header="Send to Outdated keys"
                               Command="{Binding SendToOutdatedKeysCommand}" />
+                    <MenuItem Header="Copy key"
+                              Command="{Binding CopySelectedKeyCommand}" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>

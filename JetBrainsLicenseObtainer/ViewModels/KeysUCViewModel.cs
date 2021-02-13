@@ -7,6 +7,7 @@ using JetBrainsLicenseObtainer.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace JetBrainsLicenseObtainer.ViewModels
@@ -122,6 +123,21 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
         #endregion
 
+        #region CopySelectedKeyCommand
+
+        public ICommand CopySelectedKeyCommand { get; set; }
+
+        private bool CanCopySelectedKeyCommandExecute(object parameter) => true;
+        private void OnCopySelectedKeyCommandExecuted(object parameter)
+        {
+            if (SelectedKey != null)
+            {
+                Clipboard.SetText(SelectedKey.LicenseKey);
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region Constructor
@@ -134,6 +150,7 @@ namespace JetBrainsLicenseObtainer.ViewModels
             ExportToCsvCommand = new RelayCommand(OnExportToCsvCommandExecuted, CanExportToCsvCommandExecute);
             OrganizeKeysCommand = new RelayCommand(OnOrganizeKeysCommandExecuted, CanOrganizeKeysCommandExecute);
             SendToOutdatedKeysCommand = new RelayCommand(OnSendToOutdatedKeysCommandExecuted, CanSendToOutdatedKeysCommandExecute);
+            CopySelectedKeyCommand = new RelayCommand(OnCopySelectedKeyCommandExecuted, CanCopySelectedKeyCommandExecute);
 
             #endregion
 
