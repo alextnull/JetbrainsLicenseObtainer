@@ -46,6 +46,7 @@ namespace JetBrainsLicenseObtainer.ViewModels
         private bool CanLoadKeysCommandExecute(object parameter) => true;
         private void OnLoadKeysCommandExecuted(object parameter)
         {
+            OrganizeKeysCommand.Execute(null);
             using (DataContext db = new DataContext())
             {
                 Keys = new AsyncObservableCollection<Models.Key>(db.Keys.ToList());
@@ -136,7 +137,6 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
             #endregion
 
-            OrganizeKeysCommand.Execute(null);
             LoadKeysCommand.Execute(null);
             
         }
