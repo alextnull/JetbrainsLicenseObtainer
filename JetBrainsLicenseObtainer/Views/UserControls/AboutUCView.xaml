@@ -13,29 +13,105 @@
     <UserControl.DataContext>
         <vm:AboutUCViewModel />
     </UserControl.DataContext>
+    
+    <!--#region Styles-->
+    
+    <UserControl.Resources>
+        <Style x:Key="textblock-header"
+               TargetType="TextBlock">
+            <Setter Property="FontWeight"
+                    Value="DemiBold" />
+            <Setter Property="FontSize"
+                    Value="24" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Left" />
+            <Setter Property="Margin"
+                    Value="20, 20, 20, 10" />
+        </Style>
+        <Style x:Key="rectangle-underline"
+               TargetType="Rectangle">
+            <Setter Property="Fill"
+                    Value="#bababa" />
+            <Setter Property="Height"
+                    Value="1" />
+            <Setter Property="Margin"
+                    Value="20, 0, 20, 15" />
+        </Style>
+        <Style x:Key="textblock-main-header" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment"
+                    Value="Center" />
+            <Setter Property="FontSize"
+                    Value="28" />
+            <Setter Property="FontWeight"
+                    Value="Bold" />
+            <Setter Property="FontFamily"
+                    Value="Century Gothic" />
+            <Setter Property="Margin"
+                    Value="0, 15, 0, 0" />
+        </Style>
+        <ControlTemplate x:Key="button-github" TargetType="Button">
+            <Border BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="0"
+                    Background="Transparent"
+                    Height="{TemplateBinding Height}"
+                    Width="{TemplateBinding Width}">
+                <ContentControl Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled"
+                         Value="True">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <fa:ImageAwesome Icon="Brands_Github"
+                                             Height="50" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <fa:ImageAwesome Icon="Brands_Github"
+                                             Height="50"
+                                             Foreground="#d10000" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsPressed"
+                         Value="True">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <fa:ImageAwesome Icon="Brands_Github"
+                                             Height="50"
+                                             Foreground="#ff0000" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
+    
+    <!--#endregion-->
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="80" />
         </Grid.RowDefinitions>
+
+        <!--#region Text panel-->
+        
         <StackPanel Grid.Row="0">
-            <TextBlock HorizontalAlignment="Center"
-                       FontSize="28"
-                       FontWeight="Bold"
-                       FontFamily="Century Gothic"
-                       Margin="0, 15, 0, 0">
-                Jetbrains License Obtainer v0.0.1
-            </TextBlock>
+            <TextBlock Style="{StaticResource textblock-main-header}"
+                       Text="Jetbrains License Obtainer v0.0.1" />
+            
             <!--// Description //-->
             <TextBlock Text="Description"
-                       FontWeight="DemiBold"
-                       FontSize="24"
-                       HorizontalAlignment="Left"
-                       Margin="20, 20, 20, 10" />
-            <Rectangle DockPanel.Dock="Top"
-                       Fill="#bababa"
-                       Height="1"
-                       Margin="20, 0, 20, 15" />
+                       Style="{StaticResource textblock-header}" />
+            <Rectangle Style="{StaticResource rectangle-underline}" />
             <TextBlock Margin="20, 0"
                        FontSize="18">
                 Selenium bot that creates jetbrains educational license through Stepik website.
@@ -43,79 +119,33 @@
 
             <!--// Information //-->
             <TextBlock Text="Information"
-                       FontWeight="DemiBold"
-                       FontSize="24"
-                       HorizontalAlignment="Left"
-                       Margin="20, 20, 20, 10" />
-            <Rectangle DockPanel.Dock="Top"
-                       Fill="#bababa"
-                       Height="1"
-                       Margin="20, 0, 20, 15" />
+                       Style="{StaticResource textblock-header}" />
+            <Rectangle Style="{StaticResource rectangle-underline}" />
+            
             <TextBlock Margin="40, 0, 40, 0"
-                       FontSize="18">
-                1. Stepik website does not ban the IP from which many accounts have been registered.
-            </TextBlock>
+                       FontSize="18"
+                       Text="1. Stepik website does not ban the IP from which many accounts have been registered." />
+            
             <TextBlock Margin="40, 10"
-                       FontSize="18">
-                2. Jetbrains educational license usually arrives in an 1-3 hours.
-            </TextBlock>
+                       FontSize="18"
+                       Text="2. Jetbrains educational license usually arrives in an 1-3 hours." />
+            
             <TextBlock Margin="40, 0"
-                       FontSize="18">
-                3. The license is issued for 3 months.
-            </TextBlock>
+                       FontSize="18"
+                       Text="3. The license is issued for 3 months." />
         </StackPanel>
+        
+        <!--#endregion-->
 
+        <!--#region Buttons panel-->
+        
         <Grid Grid.Row="1">
-            <Button HorizontalContentAlignment="Center"
-                    HorizontalAlignment="Left"
+            <Button HorizontalAlignment="Left"
                     Margin="20, 10"
-                    Command="{Binding OpenGithubPageCommand}">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="0"
-                                Background="Transparent"
-                                Height="{TemplateBinding Height}"
-                                Width="{TemplateBinding Width}">
-                            <ContentControl Margin="{TemplateBinding Padding}"
-                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                            Content="{TemplateBinding Content}" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsEnabled"
-                                     Value="True">
-                                <Setter Property="Content">
-                                    <Setter.Value>
-                                        <fa:ImageAwesome Icon="Brands_Github"
-                                                         Height="50" />
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver"
-                                     Value="True">
-                                <Setter Property="Content">
-                                    <Setter.Value>
-                                        <fa:ImageAwesome Icon="Brands_Github"
-                                                         Height="50"
-                                                         Foreground="#d10000" />
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                            <Trigger Property="IsPressed"
-                                     Value="True">
-                                <Setter Property="Content">
-                                    <Setter.Value>
-                                        <fa:ImageAwesome Icon="Brands_Github"
-                                                         Height="50"
-                                                         Foreground="#ff0000" />
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+                    Command="{Binding OpenGithubPageCommand}"
+                    Template="{StaticResource button-github}" />
         </Grid>
+        
+        <!--#endregion-->
     </Grid>
 </UserControl>
