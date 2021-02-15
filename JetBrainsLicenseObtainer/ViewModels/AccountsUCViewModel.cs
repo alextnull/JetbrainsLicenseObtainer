@@ -17,12 +17,18 @@ namespace JetBrainsLicenseObtainer.ViewModels
 {
     public class AccountsUCViewModel : ViewModelBase
     {
+        #region Properties
+
+        #region Accounts collection
+
         AsyncObservableCollection<Account> _accounts;
         public AsyncObservableCollection<Account> Accounts
         {
             get => _accounts;
             set => Set(ref _accounts, value);
         }
+
+        #endregion
 
         #region ViewModel Access
 
@@ -77,6 +83,8 @@ namespace JetBrainsLicenseObtainer.ViewModels
             get => _selectedAccount;
             set => Set(ref _selectedAccount, value);
         }
+
+        #endregion
 
         #endregion
 
@@ -258,7 +266,10 @@ namespace JetBrainsLicenseObtainer.ViewModels
         }
 
         #endregion
+
         #endregion
+
+        #region Constructor
 
         public AccountsUCViewModel()
         {
@@ -276,8 +287,8 @@ namespace JetBrainsLicenseObtainer.ViewModels
             #endregion
 
             LoadAccountsCommand.Execute(null);
-
         }
 
+        #endregion
     }
 }
