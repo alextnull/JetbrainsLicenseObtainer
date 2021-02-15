@@ -17,7 +17,7 @@ namespace JetBrainsLicenseObtainer.Models
 
         public override string ToString()
         {
-            return $"{LicenseKey} {RegistrationDate.ToString("0:dd.MM.yyyy HH:mm:ss")} {ExpirationDate.ToString("0:dd.MM.yyyy HH:mm:ss")}";
+            return $"{LicenseKey} {RegistrationDate.ToString("dd.MM.yyyy HH:mm:ss")} {ExpirationDate.ToString("dd.MM.yyyy HH:mm:ss")}";
         }
 
         #endregion
