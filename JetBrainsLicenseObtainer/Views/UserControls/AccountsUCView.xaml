@@ -133,6 +133,8 @@
                 <MenuItem Header="Export to csv"
                           IsEnabled="{Binding ViewModelAccess}" 
                           Command="{Binding ExportToCsvCommand}"/>
+                <MenuItem Header="Copy selected account"
+                          Command="{Binding CopySelectedAccountCommand}" />
             </MenuItem>
         </Menu>
 
@@ -229,6 +231,13 @@
                                     Binding="{Binding RegistrationDate, StringFormat=\{0:dd.MM.yyyy HH:mm:ss\}}"
                                     Width="60*" />
             </DataGrid.Columns>
+
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Copy account"
+                              Command="{Binding CopySelectedAccountCommand}" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
 
         <!--#endregion-->
