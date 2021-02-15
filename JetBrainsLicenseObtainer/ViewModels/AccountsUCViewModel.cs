@@ -67,6 +67,18 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
         #endregion
 
+        #region Selected account
+
+        private Account _selectedAccount;
+
+        public Account SelectedAccount
+        {
+            get => _selectedAccount;
+            set => Set(ref _selectedAccount, value);
+        }
+
+        #endregion
+
         #region Commands
 
         #region IncreasePropertyCommand

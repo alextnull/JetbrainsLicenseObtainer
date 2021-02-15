@@ -213,8 +213,8 @@
                    RowBackground="#DCDCDC"
                    AlternatingRowBackground="White"
                    IsReadOnly="True"
-                   SelectionUnit="Cell"
-                   ItemsSource="{Binding Accounts}">
+                   ItemsSource="{Binding Accounts}"
+                   SelectedItem="{Binding SelectedAccount}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Full name"
                                     Binding="{Binding FullName}"
