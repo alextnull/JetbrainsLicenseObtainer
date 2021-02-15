@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Windows;
 using System.Windows.Input;
 
 namespace JetBrainsLicenseObtainer.ViewModels
@@ -243,6 +244,20 @@ namespace JetBrainsLicenseObtainer.ViewModels
 
         #endregion
 
+        #region CopySelectedAccountCommand
+
+        public ICommand CopySelectedAccountCommand { get; set; }
+
+        private bool CanCopySelectedAccountCommandExecute(object parameter) => true;
+        private void OnCopySelectedAccountCommandExecuted(object parameter)
+        {
+            if (SelectedAccount != null)
+            {
+                Clipboard.SetText(SelectedAccount.ToString());
+            }
+        }
+
+        #endregion
         #endregion
 
         public AccountsUCViewModel()
@@ -256,6 +271,8 @@ namespace JetBrainsLicenseObtainer.ViewModels
             ParseJetbrainsLicenseCommandAsync = new AsyncRelayCommand(OnParseJetbrainsLicenseCommandAsyncExecuted, CanParseJetbrainsLicenseCommandAsyncExecute);
             ExportToCsvCommand = new RelayCommand(OnExportToCsvCommandExecuted, CanExportToCsvCommandExecute);
             AutoGenerateCommandAsync = new AsyncRelayCommand(OnAutoGenerateCommandAsyncExecuted, CanAutoGenerateCommandAsyncExecute);
+            CopySelectedAccountCommand = new RelayCommand(OnCopySelectedAccountCommandExecuted, CanCopySelectedAccountCommandExecute);
+
             #endregion
 
             LoadAccountsCommand.Execute(null);
