@@ -14,6 +14,15 @@ namespace JetBrainsLicenseObtainer.Models
 
         #endregion
 
+        #region Methods
+
+        public override string ToString()
+        {
+            return $"{FullName} {Email} {Password} {RegistrationDate.ToString("0:dd.MM.yyyy HH:mm:ss")}";
+        }
+
+        #endregion
+
         #region Constructor
 
         public Account()
@@ -30,5 +39,6 @@ namespace JetBrainsLicenseObtainer.Models
         }
 
         #endregion
+
     }
 }
