@@ -10,8 +10,10 @@
              d:DesignWidth="800"
              Background="White">
 
-    <!--#region Resourses-->
+    <!--#region Stlyes-->
+    
     <UserControl.Resources>
+        
         <Style x:Key="toppanel-textblock"
                TargetType="TextBlock">
             <Setter Property="MinWidth"
@@ -112,6 +114,7 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
     </UserControl.Resources>
+    
     <!--#endregion-->
 
     <UserControl.DataContext>
@@ -119,6 +122,7 @@
     </UserControl.DataContext>
 
     <Grid>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="18" />
             <RowDefinition Height="115" />
@@ -141,8 +145,12 @@
         <!--#endregion-->
         
         <!--#region Top Panel-->
+        
         <StackPanel Grid.Row="1"
                     Margin="15, 15, 0, 0">
+            
+            <!--#region Accounts count--> 
+            
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Top">
                 <TextBlock Text="Accounts count"
@@ -172,6 +180,11 @@
                             Template="{StaticResource botpanel-button-template}" />
                 </StackPanel>
             </StackPanel>
+            
+            <!--#endregion-->
+            
+            <!--#region Parse keys delay-->
+            
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Top">
                 <TextBlock Text="Parse keys after"
@@ -203,10 +216,15 @@
                            Style="{StaticResource toppanel-textblock}"
                            Margin="15, 10, 10, 10" />
             </StackPanel>
+            
+            <!--#endregion-->
+            
         </StackPanel>
+        
         <!--#endregion-->
 
         <!--#region Accounts DataGrid-->
+        
         <DataGrid  x:Name="accountsGrid"
                    Grid.Row="2"
                    Margin="15, 10"
@@ -217,6 +235,7 @@
                    IsReadOnly="True"
                    ItemsSource="{Binding Accounts}"
                    SelectedItem="{Binding SelectedAccount}">
+            
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Full name"
                                     Binding="{Binding FullName}"
@@ -238,11 +257,13 @@
                               Command="{Binding CopySelectedAccountCommand}" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
+            
         </DataGrid>
 
         <!--#endregion-->
 
         <!--#region Bot Panel-->
+        
         <StackPanel Grid.Row="3"
                     Orientation="Horizontal">
 
@@ -293,5 +314,6 @@
         </StackPanel>
 
         <!--#endregion-->
+        
     </Grid>
 </UserControl>
